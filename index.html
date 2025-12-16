@@ -6,13 +6,13 @@
     <title>Maths - Collège</title>
     <style>
         /* --- 1. LE FOND ET LA STRUCTURE --- */
-     body {
+        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0; padding: 0;
             width: 100%; min-height: 100vh;
             color: white;
             
-            /* LE FOND CLAIR (Bleu vers Violet, comme sur ta photo) */
+            /* LE FOND LUMINEUX (Bleu -> Violet) */
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             
             display: flex; justify-content: center; align-items: center; flex-direction: column;
@@ -35,20 +35,14 @@
             font-weight: normal;
             user-select: none;
             will-change: transform, opacity;
-            /* Animation très fluide */
             animation: floating linear infinite;
         }
 
-        /* L'animation douce : Apparition -> Flottement -> Disparition */
         @keyframes floating {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0;
-            }
-            15% { opacity: var(--target-opacity); } /* Apparaît doucement */
-            85% { opacity: var(--target-opacity); } /* Reste visible longtemps */
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+            15% { opacity: var(--target-opacity); } 
+            85% { opacity: var(--target-opacity); } 
             100% {
-                /* Se déplace vers la destination calculée en JS */
                 transform: translate(var(--move-x), var(--move-y)) rotate(var(--rotate));
                 opacity: 0;
             }
@@ -59,12 +53,12 @@
             display: none; 
             z-index: 10; 
             position: relative; 
-            width: 100%; max-width: 900px; 
+            width: 100%; max-width: 1100px; 
             text-align: center;
         }
 
         .main-title {
-            font-size: 4.5rem; /* Très gros titre */
+            font-size: 4rem; 
             font-weight: 800;
             margin-bottom: 20px;
             text-shadow: 0 5px 20px rgba(0,0,0,0.3);
@@ -73,33 +67,31 @@
         
         .subtitle {
             font-size: 1.2rem;
-            opacity: 0.8;
-            margin-bottom: 50px;
-            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            font-weight: 400;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        /* --- 4. GRILLE DES BOUTONS --- */
-        /* --- 4. GRILLE DES BOUTONS (LARGE & 3 COLONNES) --- */
+        /* --- 4. GRILLE DES BOUTONS (3 COLONNES) --- */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 colonnes obligatoires */
+            grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
             gap: 30px;
             justify-content: center;
-            max-width: 1100px; /* Beaucoup plus large pour que ça rentre */
+            max-width: 1100px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* Adaptation pour tablettes et téléphones */
+        /* Adaptation mobile */
         @media (max-width: 900px) { .menu-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 600px) { .menu-grid { grid-template-columns: 1fr; } }
 
         .card {
             background: white; 
-            width: 100%; 
-            height: 180px;
+            width: 100%; height: 180px;
             border-radius: 25px;
             border: none;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -123,7 +115,6 @@
         .card.auto { background: linear-gradient(135deg, #42e695 0%, #3bb2b8 100%); }
         .card.auto h2, .card.auto span { color: white !important; text-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        
         /* BOUTONS INTERNES */
         .btn {
             display: inline-block; margin: 10px; padding: 15px 30px;
@@ -145,12 +136,10 @@
 
     <!-- === ACCUEIL === -->
     <div id="accueil" class="page" style="display: block;">
-        <div class="main-title">
-           📐 Mathématiques
-        </div>
+        <div class="main-title">📐 Mathématiques</div>
         <div class="subtitle">Choisissez votre niveau</div>
     
-       <div class="menu-grid">
+        <div class="menu-grid">
             <!-- Ligne 1 -->
             <button class="card" onclick="naviguer('menu-6e')">
                 <h2>🔢 6ème</h2><span>Niveau 1</span>
@@ -166,8 +155,6 @@
             <button class="card" onclick="naviguer('menu-3e')">
                 <h2>∑ 3ème</h2><span>Niveau 4</span>
             </button>
-            
-            <!-- Les nouveaux boutons (Scratch et Auto) -->
             <button class="card scratch" onclick="alert('Bientôt !')">
                 <h2>🎨 Scratch</h2><span>Programmation</span>
             </button>
@@ -182,7 +169,7 @@
         <h1>Niveau 6ème</h1>
         <div class="course-content">
             <h3>Chapitres :</h3>
-            <button class="btn" onclick="naviguer('chap1-6e')">Chapitre 1 : Les nombres entiers</button>
+            <button class="btn" onclick="naviguer('chap1-6e')">Chapitre 1 : Nombres et calculs</button>
         </div>
         <button class="btn btn-retour" onclick="naviguer('accueil')">Retour Accueil</button>
     </div>
@@ -191,7 +178,7 @@
         <h1>6e - Chapitre 1</h1>
         <div class="course-content">
             <p>Que veux-tu faire ?</p>
-            <button class="btn" style="background:#48bb78; color:white;" onclick="naviguer('contenu-cours-6e-ch1')">📑 Cours</button>
+            <button class="btn" style="background:#48bb78; color:white;" onclick="naviguer('contenu-cours-6e-ch1')">📑 Le Cours</button>
             <button class="btn" style="background:#ed8936; color:white;" onclick="alert('Quiz bientôt disponible !')">❓ Quiz</button>
             <button class="btn" style="background:#4299e1; color:white;" onclick="alert('Fiche d'exercices bientôt disponibles !')">📝 Fiche d'exercices</button>
         </div>
@@ -206,12 +193,13 @@
         <button class="btn btn-retour" onclick="naviguer('chap1-6e')">Retour</button>
     </div>
 
-    <!-- Placeholders -->
+    <!-- Placeholders (pour que les boutons 5e, 4e, 3e ne fassent pas d'erreur) -->
     <div id="menu-5e" class="page"><h1>5ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
     <div id="menu-4e" class="page"><h1>4ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
     <div id="menu-3e" class="page"><h1>3ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
 
- <script>
+    <!-- === LOGIQUE JAVASCRIPT === -->
+    <script>
         // --- 1. LISTES DE SYMBOLES PAR NIVEAU ---
         const f_accueil = ["π", "∑", "∫", "x", "y", "√", "∞", "≠", "≈", "∆", "µ", "β", "Ω", "θ", "sin", "log", "tan"];
         
@@ -252,9 +240,7 @@
             // Profondeur
             const depth = Math.random(); 
             
-            // --- C'EST ICI QUE J'AI RÉDUIT LA TAILLE ---
-            // Avant c'était * 130. Maintenant * 50.
-            // La taille sera entre 15px et 65px.
+            // Taille réduite (entre 15px et 65px)
             const size = (depth * 50) + 15; 
             el.style.fontSize = size + 'px';
             
@@ -266,7 +252,7 @@
             const opacity = (depth * 0.4) + 0.1; 
             el.style.setProperty('--target-opacity', opacity);
 
-            // Mouvement
+            // Mouvement (Rapide et tournant)
             const moveX = (Math.random() - 0.5) * 300; 
             const moveY = (Math.random() - 0.5) * 300; 
             const rotate = (Math.random() - 0.5) * 720; 

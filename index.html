@@ -190,15 +190,14 @@
     <div id="menu-4e" class="page"><h1>4ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
     <div id="menu-3e" class="page"><h1>3ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
 
-    <!-- === LOGIQUE JAVASCRIPT === -->
-    <script>
+ <script>
         function naviguer(idPage) {
             document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
             const page = document.getElementById(idPage);
             if(page) page.style.display = 'block';
         }
 
-        // --- GÉNÉRATEUR STYLE "VIDÉO CALME" ---
+        // --- GÉNÉRATEUR RAPIDE & TOURNANT ---
         const symbols = ["π", "∑", "∫", "x", "y", "√", "∞", "≠", "≈", "∆", "µ", "β", "Ω", "θ", "sin", "log", "tan"];
         const container = document.getElementById('background-formulas');
 
@@ -213,45 +212,41 @@
             el.style.left = Math.random() * 100 + 'vw';
             el.style.top = Math.random() * 100 + 'vh';
             
-            // 2. LE SECRET DE LA VIDÉO : Flou et Opacité variables
-            // On définit une "profondeur" (depth)
+            // 2. Profondeur & Flou
             const depth = Math.random(); 
-            
-            // Taille : Pas trop gros, entre 20px et 80px (élégant)
             const size = (depth * 60) + 20; 
             el.style.fontSize = size + 'px';
-            
-            // Flou : Plus c'est profond, plus c'est flou
             const blur = (1 - depth) * 4; 
             el.style.filter = `blur(${blur}px)`;
-            
-            // Opacité : Assez faible pour faire "fantomatique"
-            const opacity = (depth * 0.3) + 0.1; 
+            const opacity = (depth * 0.4) + 0.1; 
             el.style.setProperty('--target-opacity', opacity);
 
-            // 3. Mouvement : LENT et DOUX (Comme la vidéo)
-            // On déplace juste un peu, pas traverser tout l'écran
-            const moveX = (Math.random() - 0.5) * 150; 
-            const moveY = (Math.random() - 0.5) * 150; 
-            const rotate = (Math.random() - 0.5) * 50; 
+            // 3. MOUVEMENT & ROTATION (C'est ici que ça change !)
+            // On augmente la distance de déplacement (300px)
+            const moveX = (Math.random() - 0.5) * 300; 
+            const moveY = (Math.random() - 0.5) * 300; 
+            
+            // ROTATION FORTE : Ils tournent beaucoup (jusqu'à 360 degrés)
+            const rotate = (Math.random() - 0.5) * 720; // 720 = 2 tours complets
             
             el.style.setProperty('--move-x', moveX + 'px');
             el.style.setProperty('--move-y', moveY + 'px');
             el.style.setProperty('--rotate', rotate + 'deg');
 
-            // 4. Durée très longue : 20 à 40 secondes
-            const duration = (Math.random() * 20) + 20; 
+            // 4. VITESSE ACCÉLÉRÉE
+            // Entre 6 et 12 secondes (C'est beaucoup plus rapide qu'avant)
+            const duration = (Math.random() * 6) + 6; 
             el.style.animationDuration = duration + 's';
             
             container.appendChild(el);
             setTimeout(() => { el.remove(); }, duration * 1000);
         }
 
-        // Remplissage initial (Beaucoup de symboles pour faire l'effet dès le début)
-        for(let i=0; i<50; i++) createSymbol();
+        // On remplit l'écran
+        for(let i=0; i<40; i++) createSymbol();
         
-        // On en rajoute doucement
-        setInterval(createSymbol, 600);
+        // On en crée souvent (toutes les 0.4 secondes) pour que ça bouge bien
+        setInterval(createSymbol, 400);
     </script>
 </body>
 </html>

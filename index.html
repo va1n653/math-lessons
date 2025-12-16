@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maths Collège</title>
     <style>
-        /* --- 1. CONFIGURATION GLOBALE & CENTRAGE --- */
+        /* --- 1. CONFIGURATION GLOBALE --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -14,120 +14,211 @@
             min-height: 100vh;
             color: white;
             
-            /* LE CENTRAGE PARFAIT */
+            /* CENTRAGE */
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             
-            /* NOUVEAU FOND : LE BLEU/VIOLET PROFOND (Comme la photo) */
+            /* LE FOND VIOLET/BLEU */
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             
             overflow-x: hidden;
             position: relative;
         }
 
-        /* --- 2. LES FORMULES FLOTTANTES (PLUS GROSSES & VISIBLES) --- */
+        /* --- 2. LES FORMULES FLOTTANTES --- */
         #background-formulas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 0;
+            z-index: -1; /* IMPORTANT : On le met tout au fond */
             overflow: hidden;
         }
 
         .math-symbol {
             position: absolute;
-            color: white; /* Blanc pur */
+            color: rgba(255, 255, 255, 0.3); /* Blanc semi-transparent */
             font-family: 'Courier New', monospace;
-            font-weight: 900; /* Gras pour être plus visible */
+            font-weight: 900;
             user-select: none;
             animation: floatAndFade linear infinite; 
-            text-shadow: 0 0 10px rgba(255,255,255,0.3); /* Petite lueur */
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
         }
 
-        /* Animation : On augmente l'opacité pour qu'on les voit mieux */
         @keyframes floatAndFade {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.25; /* VISIBILITÉ AUGMENTÉE ICI */
-            }
-            90% {
-                opacity: 0.25; /* Reste visible longtemps */
-            }
-            100% {
-                transform: translateY(-150px) rotate(20deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.4; } /* Bien visible */
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-150px) rotate(20deg); opacity: 0; }
         }
 
         /* --- 3. LE CONTENU --- */
         .page { 
-            display: none; 
-            z-index: 10; 
+            display: none; /* Caché par défaut */
+            z-index: 10;   /* Au premier plan */
             position: relative;
             width: 100%;
             max-width: 900px;
             text-align: center;
-            animation: popIn 0.5s ease;
         }
         
-        #accueil { display: block; }
-
-        @keyframes popIn { 
-            from { opacity: 0; transform: scale(0.9); } 
-            to { opacity: 1; transform: scale(1); } 
-        }
-
         .main-title {
-            font-size: 3.5rem; /* Titre plus gros */
+            font-size: 3.5rem;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             text-shadow: 0 4px 15px rgba(0,0,0,0.3);
             display: flex; justify-content: center; align-items: center; gap: 15px;
         }
 
-        /* --- 4. LA GRILLE DES 4 BOUTONS --- */
+        /* --- 4. LA GRILLE DES BOUTONS --- */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 colonnes strictes */
-            gap: 30px; /* Plus d'espace entre les boutons */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
             justify-content: center;
-            margin-top: 50px;
-            max-width: 600px; /* On limite la largeur pour centrer le bloc */
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
+            max-width: 600px;
+            padding: 20px;
         }
 
-        /* Responsive : Sur téléphone, 1 seule colonne */
-        @media (max-width: 600px) {
-            .menu-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 600px) { .menu-grid { grid-template-columns: 1fr; } }
 
         .card {
             background: white;
-            width: 100%; /* Prend la place de la grille */
+            width: 100%;
             height: 160px;
             border-radius: 25px;
             border: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
             cursor: pointer;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.25); /* Ombre plus marquée */
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            transition: transform 0.3s;
+            text-decoration: none;
         }
 
         .card:hover { transform: translateY(-10px) scale(1.05); }
-
         .card h2 { margin: 0; font-size: 36px; color: #5a67d8; font-weight: 800; }
-        .card span { font-size: 14px; color: #a0aec0; margin-top: 8px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
+        .card span { font-size: 14px; color: #a0aec0; margin-top: 8px; text-transform: uppercase; font-weight: bold; }
 
-        /* Boutons internes */
+        /* BOUTONS INTERNES */
         .btn {
-            display: inline-block;
-            margin: 10px; padding: 15px 30p
+            display: inline-block; margin: 10px; padding: 15px 30px;
+            border: none; border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer;
+            background: white; color: #333; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        .btn:hover { transform: scale(1.05); }
+        .btn-retour { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.5); margin-top: 30px; }
+        
+        .course-content { background: rgba(255,255,255,0.95); color: #333; padding: 30px; border-radius: 20px; text-align: left; margin-top: 20px; }
+        iframe { border-radius: 10px; width: 100%; height: 600px; border: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Fond animé -->
+    <div id="background-formulas"></div>
+
+    <!-- === ÉCRAN 1 : ACCUEIL === -->
+    <!-- J'ai ajouté style="display:block" pour forcer l'affichage -->
+    <div id="accueil" class="page" style="display: block;">
+        <div class="main-title">
+            <span>📐</span> Mathématiques
+        </div>
+        <p style="opacity: 0.9; font-size: 1.3rem;">Choisissez votre niveau</p>
+    
+        <div class="menu-grid">
+            <button class="card" onclick="naviguer('menu-6e')">
+                <h2>🔢 6ème</h2><span>Niveau 1</span>
+            </button>
+            <button class="card" onclick="naviguer('menu-5e')">
+                <h2>📊 5ème</h2><span>Niveau 2</span>
+            </button>
+            <button class="card" onclick="naviguer('menu-4e')">
+                <h2>📐 4ème</h2><span>Niveau 3</span>
+            </button>
+            <button class="card" onclick="naviguer('menu-3e')">
+                <h2>∑ 3ème</h2><span>Niveau 4</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- === ÉCRAN 2 : MENU 6ème === -->
+    <div id="menu-6e" class="page">
+        <h1>Niveau 6ème</h1>
+        <div class="course-content">
+            <h3>Chapitres disponibles :</h3>
+            <button class="btn" onclick="naviguer('chap1-6e')">Chapitre 1 : Nombres et calculs</button>
+            <p>D'autres chapitres arrivent bientôt...</p>
+        </div>
+        <button class="btn btn-retour" onclick="naviguer('accueil')">⬅ Retour Accueil</button>
+    </div>
+
+    <!-- === ÉCRAN 3 : DÉTAIL CHAPITRE 1 === -->
+    <div id="chap1-6e" class="page">
+        <h1>6e - Chapitre 1</h1>
+        <div class="course-content">
+            <p>Que veux-tu faire ?</p>
+            <button class="btn" style="background:#4caf50; color:white;" onclick="naviguer('contenu-cours-6e-ch1')">📑 Voir le Cours</button>
+            <button class="btn" style="background:#ff9800; color:white;" onclick="alert('Quiz à venir !')">❓ Faire le Quiz</button>
+            <button class="btn" style="background:#2196f3; color:white;" onclick="alert('Exercices à venir !')">📝 Faire des Exercices</button>
+        </div>
+        <button class="btn btn-retour" onclick="naviguer('menu-6e')">⬅ Retour Menu 6e</button>
+    </div>
+
+    <!-- === ÉCRAN 4 : LE PDF === -->
+    <div id="contenu-cours-6e-ch1" class="page">
+        <h1>Cours : Nombres et calculs</h1>
+        <div class="course-content">
+            <!-- Remplace bien le nom du fichier PDF s'il le faut -->
+            <iframe src="cours/6e_MATHS_CHAPITRE_1_LECON.pdf"></iframe>
+        </div>
+        <button class="btn btn-retour" onclick="naviguer('chap1-6e')">⬅ Retour</button>
+    </div>
+
+    <!-- Placeholders pour les autres niveaux -->
+    <div id="menu-5e" class="page"><h1>5ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
+    <div id="menu-4e" class="page"><h1>4ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
+    <div id="menu-3e" class="page"><h1>3ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
+
+    <!-- === SCRIPTS === -->
+    <script>
+        // Navigation
+        function naviguer(idPage) {
+            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+            const page = document.getElementById(idPage);
+            if(page) page.style.display = 'block';
+        }
+
+        // Formules mathématiques
+        const symbols = ["π", "∑", "∞", "√", "∫", "x²", "sin", "cos", "tan", "%", "≠", "≈", "div", "3.14", "α", "β", "∆", "∅"];
+        const container = document.getElementById('background-formulas');
+
+        function createSymbol() {
+            if(!container) return; // Sécurité
+
+            const el = document.createElement('div');
+            el.classList.add('math-symbol');
+            el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            el.style.left = Math.random() * 95 + 'vw'; 
+            el.style.top = Math.random() * 95 + 'vh';
+            
+            // Taille très grosse
+            const size = Math.random() * 60 + 50; 
+            el.style.fontSize = size + 'px';
+            
+            const duration = Math.random() * 10 + 5; 
+            el.style.animationDuration = duration + 's';
+            
+            container.appendChild(el);
+            setTimeout(() => { el.remove(); }, duration * 1000);
+        }
+
+        // Lancer les formules
+        setInterval(createSymbol, 400);
+        for(let i=0; i<15; i++) createSymbol();
+    </script>
+</body>
+</html>

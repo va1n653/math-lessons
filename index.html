@@ -220,32 +220,22 @@
         const f_4e = ["x²", "Pythagore", "Cos", "10⁵", "10⁻³", "x+3=0", "Vitesse", "Translation", "Cône", "Pyramide"];
         const f_3e = ["f(x)", "Thalès", "Probabilité", "sin", "tan", "Sphère", "Homothétie", "Boule", "Ratio", "a²-b²"];
 
-        // Par défaut, on utilise la liste Accueil
         let symbolesActuels = f_accueil;
 
-        // --- 2. FONCTION DE NAVIGATION INTELLIGENTE ---
+        // --- 2. FONCTION DE NAVIGATION ---
         function naviguer(idPage) {
-            // A. Changement de page classique
             document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
             const page = document.getElementById(idPage);
             if(page) page.style.display = 'block';
 
-            // B. Changement des symboles selon la page
-            if (idPage.includes('6e')) {
-                symbolesActuels = f_6e;
-            } else if (idPage.includes('5e')) {
-                symbolesActuels = f_5e;
-            } else if (idPage.includes('4e')) {
-                symbolesActuels = f_4e;
-            } else if (idPage.includes('3e')) {
-                symbolesActuels = f_3e;
-            } else {
-                // Si on revient à l'accueil ou ailleurs
-                symbolesActuels = f_accueil;
-            }
+            if (idPage.includes('6e')) { symbolesActuels = f_6e; }
+            else if (idPage.includes('5e')) { symbolesActuels = f_5e; }
+            else if (idPage.includes('4e')) { symbolesActuels = f_4e; }
+            else if (idPage.includes('3e')) { symbolesActuels = f_3e; }
+            else { symbolesActuels = f_accueil; }
         }
 
-        // --- 3. GÉNÉRATEUR DE SYMBOLES (Le moteur du fond) ---
+        // --- 3. GÉNÉRATEUR DE SYMBOLES ---
         const container = document.getElementById('background-formulas');
 
         function createSymbol() {
@@ -253,24 +243,30 @@
 
             const el = document.createElement('div');
             el.classList.add('math-symbol');
-            
-            // ICI : On pioche dans la liste "symbolesActuels" qui change selon la page
             el.innerText = symbolesActuels[Math.floor(Math.random() * symbolesActuels.length)];
             
             // Position
             el.style.left = Math.random() * 100 + 'vw';
             el.style.top = Math.random() * 100 + 'vh';
             
-            // Profondeur & Flou
+            // Profondeur
             const depth = Math.random(); 
-            const size = (depth * 130) + 20; // Gros symboles
+            
+            // --- C'EST ICI QUE J'AI RÉDUIT LA TAILLE ---
+            // Avant c'était * 130. Maintenant * 50.
+            // La taille sera entre 15px et 65px.
+            const size = (depth * 50) + 15; 
             el.style.fontSize = size + 'px';
-            const blur = (1 - depth) * 5; 
+            
+            // Flou
+            const blur = (1 - depth) * 4; 
             el.style.filter = `blur(${blur}px)`;
+            
+            // Opacité
             const opacity = (depth * 0.4) + 0.1; 
             el.style.setProperty('--target-opacity', opacity);
 
-            // Mouvement rapide et tournant
+            // Mouvement
             const moveX = (Math.random() - 0.5) * 300; 
             const moveY = (Math.random() - 0.5) * 300; 
             const rotate = (Math.random() - 0.5) * 720; 
@@ -287,8 +283,8 @@
             setTimeout(() => { el.remove(); }, duration * 1000);
         }
 
-        // Remplissage initial
         for(let i=0; i<40; i++) createSymbol();
-        // Création continue
         setInterval(createSymbol, 400);
     </script>
+</body>
+</html>

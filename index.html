@@ -32,31 +32,34 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: -1; /* IMPORTANT : On le met tout au fond */
+            z-index: -1; /* Tout au fond */
             overflow: hidden;
         }
 
         .math-symbol {
             position: absolute;
-            color: rgba(255, 255, 255, 0.3); /* Blanc semi-transparent */
+            color: rgba(255, 255, 255, 0.4); /* Blanc semi-transparent */
             font-family: 'Courier New', monospace;
-            font-weight: 900;
+            
+            /* C'EST ICI QUE J'AI CHANGÉ POUR RENDRE MOINS ÉPAIS */
+            font-weight: normal; 
+            
             user-select: none;
             animation: floatAndFade linear infinite; 
-            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+            text-shadow: 0 0 5px rgba(255,255,255,0.2);
         }
 
         @keyframes floatAndFade {
             0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.4; } /* Bien visible */
-            90% { opacity: 0.4; }
+            10% { opacity: 0.5; } /* Visible */
+            90% { opacity: 0.5; }
             100% { transform: translateY(-150px) rotate(20deg); opacity: 0; }
         }
 
         /* --- 3. LE CONTENU --- */
         .page { 
-            display: none; /* Caché par défaut */
-            z-index: 10;   /* Au premier plan */
+            display: none; 
+            z-index: 10;
             position: relative;
             width: 100%;
             max-width: 900px;
@@ -121,7 +124,6 @@
     <div id="background-formulas"></div>
 
     <!-- === ÉCRAN 1 : ACCUEIL === -->
-    <!-- J'ai ajouté style="display:block" pour forcer l'affichage -->
     <div id="accueil" class="page" style="display: block;">
         <div class="main-title">
             <span>📐</span> Mathématiques
@@ -171,32 +173,29 @@
     <div id="contenu-cours-6e-ch1" class="page">
         <h1>Cours : Nombres et calculs</h1>
         <div class="course-content">
-            <!-- Remplace bien le nom du fichier PDF s'il le faut -->
             <iframe src="cours/6e_MATHS_CHAPITRE_1_LECON.pdf"></iframe>
         </div>
         <button class="btn btn-retour" onclick="naviguer('chap1-6e')">⬅ Retour</button>
     </div>
 
-    <!-- Placeholders pour les autres niveaux -->
+    <!-- Placeholders -->
     <div id="menu-5e" class="page"><h1>5ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
     <div id="menu-4e" class="page"><h1>4ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
     <div id="menu-3e" class="page"><h1>3ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
 
     <!-- === SCRIPTS === -->
     <script>
-        // Navigation
         function naviguer(idPage) {
             document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
             const page = document.getElementById(idPage);
             if(page) page.style.display = 'block';
         }
 
-        // Formules mathématiques
         const symbols = ["π", "∑", "∞", "√", "∫", "x²", "sin", "cos", "tan", "%", "≠", "≈", "div", "3.14", "α", "β", "∆", "∅"];
         const container = document.getElementById('background-formulas');
 
         function createSymbol() {
-            if(!container) return; // Sécurité
+            if(!container) return; 
 
             const el = document.createElement('div');
             el.classList.add('math-symbol');
@@ -205,7 +204,7 @@
             el.style.left = Math.random() * 95 + 'vw'; 
             el.style.top = Math.random() * 95 + 'vh';
             
-            // Taille très grosse
+            // Taille aléatoire (grosse)
             const size = Math.random() * 60 + 50; 
             el.style.fontSize = size + 'px';
             
@@ -216,7 +215,6 @@
             setTimeout(() => { el.remove(); }, duration * 1000);
         }
 
-        // Lancer les formules
         setInterval(createSymbol, 400);
         for(let i=0; i<15; i++) createSymbol();
     </script>

@@ -12,8 +12,8 @@
             width: 100%; min-height: 100vh;
             color: white;
             
-            /* Le dégradé exact de ta vidéo (Bleu profond vers Violet) */
-            background: radial-gradient(circle at center, #4c51bf 0%, #2a2f79 100%);
+            /* NOUVEAU FOND : Bleu Indigo Profond (Comme la photo 1) */
+            background: radial-gradient(circle at center, #3b42a3 0%, #1e225e 100%);
             
             display: flex; justify-content: center; align-items: center; flex-direction: column;
             overflow: hidden; 
@@ -31,11 +31,13 @@
         .math-symbol {
             position: absolute;
             color: white;
-            font-family: 'Times New Roman', serif; 
+            font-family: 'Times New Roman', serif; /* Police Maths classique */
             font-weight: normal;
             user-select: none;
             will-change: transform, opacity;
             animation: floating linear infinite;
+            /* Petite ombre pour les détacher du fond */
+            text-shadow: 0 0 10px rgba(255,255,255,0.1);
         }
 
         @keyframes floating {
@@ -87,12 +89,17 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             cursor: pointer;
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .card:hover { transform: translateY(-10px) scale(1.03); background: white; }
-        .card h2 { margin: 0; font-size: 38px; color: #3c366b; font-weight: 800; }
-        .card span { font-size: 14px; color: #718096; margin-top: 8px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
+        
+        /* Style du texte dans les boutons */
+        .card h2 { 
+            margin: 0; font-size: 32px; color: #1e225e; font-weight: 800; 
+            display: flex; align-items: center; gap: 10px;
+        }
+        .card span { font-size: 14px; color: #5c6b7f; margin-top: 8px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
 
         /* BOUTONS INTERNES */
         .btn {
@@ -118,25 +125,26 @@
         <div class="main-title">
             Mathématiques
         </div>
-        <p style="opacity: 0.8; font-size: 1.4rem; font-weight: 300;">Collège • Exercices • Leçons</p>
+        <p style="opacity: 0.8; font-size: 1.4rem; font-weight: 300; margin-bottom: 40px;">Collège • Exercices • Leçons</p>
     
         <div class="menu-grid">
+            <!-- J'ai remis les icônes (🔢, 📊...) pour correspondre à ton design -->
             <button class="card" onclick="naviguer('menu-6e')">
-                <h2>6ème</h2><span>Niveau 1</span>
+                <h2>🔢 6ème</h2><span>Niveau 1</span>
             </button>
             <button class="card" onclick="naviguer('menu-5e')">
-                <h2>5ème</h2><span>Niveau 2</span>
+                <h2>📊 5ème</h2><span>Niveau 2</span>
             </button>
             <button class="card" onclick="naviguer('menu-4e')">
-                <h2>4ème</h2><span>Niveau 3</span>
+                <h2>📐 4ème</h2><span>Niveau 3</span>
             </button>
             <button class="card" onclick="naviguer('menu-3e')">
-                <h2>3ème</h2><span>Niveau 4</span>
+                <h2>∑ 3ème</h2><span>Niveau 4</span>
             </button>
         </div>
     </div>
 
-    <!-- === PAGES (Exemple 6ème) === -->
+    <!-- === PAGES INTERNES === -->
     <div id="menu-6e" class="page">
         <h1>Niveau 6ème</h1>
         <div class="course-content">
@@ -146,24 +154,17 @@
         <button class="btn btn-retour" onclick="naviguer('accueil')">Retour Accueil</button>
     </div>
 
-    <!-- === DÉTAIL CHAPITRE 1 === -->
     <div id="chap1-6e" class="page">
         <h1>6e - Chapitre 1</h1>
         <div class="course-content">
             <p>Que veux-tu faire ?</p>
-            <!-- Bouton Cours (Vert) -->
-            <button class="btn" style="background:#48bb78; color:white;" onclick="naviguer('contenu-cours-6e-ch1')">📑 Le Cours</button>
-            
-            <!-- Bouton Quiz (Orange) -->
+            <button class="btn" style="background:#48bb78; color:white;" onclick="naviguer('contenu-cours-6e-ch1')">📑 Cours</button>
             <button class="btn" style="background:#ed8936; color:white;" onclick="alert('Quiz bientôt disponible !')">❓ Quiz</button>
-            
-            <!-- Bouton Exercices (Bleu) - AJOUTÉ ICI -->
-            <button class="btn" style="background:#4299e1; color:white;" onclick="alert('Exercices bientôt disponibles !')">📝 Exercices</button>
+            <button class="btn" style="background:#4299e1; color:white;" onclick="alert('Fiche d'exercices bientôt disponibles !')">📝 Fiche d'exercices</button>
         </div>
         <button class="btn btn-retour" onclick="naviguer('menu-6e')">Retour</button>
     </div>
 
-    <!-- === CONTENU DU COURS (PDF) === -->
     <div id="contenu-cours-6e-ch1" class="page">
         <h1>Cours : Nombres</h1>
         <div class="course-content">
@@ -185,8 +186,8 @@
             if(page) page.style.display = 'block';
         }
 
-        // --- GÉNÉRATEUR DE FOND ---
-        const symbols = ["π", "∑", "∫", "x", "y", "√", "∞", "≠", "≈", "∆", "µ", "β", "Ω", "θ", "sin", "log"];
+        // --- GÉNÉRATEUR AMÉLIORÉ ---
+        const symbols = ["π", "∑", "∫", "x", "y", "√", "∞", "≠", "≈", "∆", "µ", "β", "Ω", "θ", "sin", "log", "cos", "tan"];
         const container = document.getElementById('background-formulas');
 
         function createSymbol() {
@@ -196,47 +197,48 @@
             el.classList.add('math-symbol');
             el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
             
-            // 1. Position
+            // Position
             const startX = Math.random() * 100;
             const startY = Math.random() * 100;
             el.style.left = startX + 'vw';
             el.style.top = startY + 'vh';
             
-            // 2. Profondeur
+            // Profondeur
             const depth = Math.random(); 
             
-            // Taille
-            const size = (depth * 60) + 20; 
+            // TAILLE XXL : Jusqu'à 150px pour ceux devant (comme ta photo 1)
+            const size = (depth * 130) + 20; 
             el.style.fontSize = size + 'px';
             
             // Flou
-            const blur = (1 - depth) * 4; 
+            const blur = (1 - depth) * 5; 
             el.style.filter = `blur(${blur}px)`;
             
-            // Opacité
-            const opacity = (depth * 0.3) + 0.05; 
+            // Opacité (Plus visible qu'avant)
+            const opacity = (depth * 0.4) + 0.1; 
             el.style.setProperty('--target-opacity', opacity);
 
-            // 3. Mouvement
-            const moveX = (Math.random() - 0.5) * 200; 
-            const moveY = (Math.random() - 0.5) * 200; 
-            const rotate = (Math.random() - 0.5) * 100; 
+            // Mouvement
+            const moveX = (Math.random() - 0.5) * 300; 
+            const moveY = (Math.random() - 0.5) * 300; 
+            const rotate = (Math.random() - 0.5) * 60; 
             
             el.style.setProperty('--move-x', moveX + 'px');
             el.style.setProperty('--move-y', moveY + 'px');
             el.style.setProperty('--rotate', rotate + 'deg');
 
-            // 4. Durée
-            const duration = (Math.random() * 30) + 20; 
+            // VITESSE ACCÉLÉRÉE : Entre 8s et 18s (au lieu de 30-50s)
+            const duration = (Math.random() * 10) + 8; 
             el.style.animationDuration = duration + 's';
             
             container.appendChild(el);
             setTimeout(() => { el.remove(); }, duration * 1000);
         }
 
-        // On remplit l'écran
-        for(let i=0; i<40; i++) createSymbol();
-        setInterval(createSymbol, 800);
+        // Remplissage initial
+        for(let i=0; i<35; i++) createSymbol();
+        // Création très rapide
+        setInterval(createSymbol, 400);
     </script>
 </body>
 </html>

@@ -5,70 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maths Collège</title>
     <style>
-        /* --- 1. CONFIGURATION GLOBALE & CENTRAGE PARFAIT --- */
+        /* --- 1. CONFIGURATION GLOBALE & CENTRAGE --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             width: 100%;
-            min-height: 100vh; /* Prend toute la hauteur de l'écran */
+            min-height: 100vh;
             color: white;
             
-            /* LE SECRET DU CENTRAGE : Flexbox */
+            /* LE CENTRAGE PARFAIT */
             display: flex;
-            justify-content: center; /* Centre horizontalement */
-            align-items: center;     /* Centre verticalement */
+            justify-content: center;
+            align-items: center;
             flex-direction: column;
             
-            /* Fond dégradé global */
-            background: linear-gradient(135deg, #5b247a 0%, #1bcedf 100%);
-            overflow-x: hidden; /* Empêche le scroll horizontal */
+            /* NOUVEAU FOND : LE BLEU/VIOLET PROFOND (Comme la photo) */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            
+            overflow-x: hidden;
             position: relative;
         }
 
-        /* --- 2. LES FORMULES FLOTTANTES (ANIMATION) --- */
-        /* Le conteneur des symboles en arrière-plan */
+        /* --- 2. LES FORMULES FLOTTANTES (PLUS GROSSES & VISIBLES) --- */
         #background-formulas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; /* On peut cliquer à travers */
-            z-index: 0; /* Derrière le contenu */
+            pointer-events: none;
+            z-index: 0;
             overflow: hidden;
         }
 
-        /* Le style d'un symbole mathématique individuel */
         .math-symbol {
             position: absolute;
-            color: rgba(255, 255, 255, 0.15); /* Blanc très transparent */
+            color: white; /* Blanc pur */
             font-family: 'Courier New', monospace;
-            font-weight: bold;
+            font-weight: 900; /* Gras pour être plus visible */
             user-select: none;
-            /* L'animation définie plus bas */
             animation: floatAndFade linear infinite; 
+            text-shadow: 0 0 10px rgba(255,255,255,0.3); /* Petite lueur */
         }
 
-        /* L'animation : Flotte vers le haut et change d'opacité */
+        /* Animation : On augmente l'opacité pour qu'on les voit mieux */
         @keyframes floatAndFade {
             0% {
                 transform: translateY(0) rotate(0deg);
                 opacity: 0;
             }
-            20% {
-                opacity: 0.3; /* Apparaît */
+            10% {
+                opacity: 0.25; /* VISIBILITÉ AUGMENTÉE ICI */
             }
-            80% {
-                opacity: 0.3; /* Reste visible */
+            90% {
+                opacity: 0.25; /* Reste visible longtemps */
             }
             100% {
-                transform: translateY(-100px) rotate(20deg); /* Monte de 100px */
-                opacity: 0; /* Disparaît */
+                transform: translateY(-150px) rotate(20deg);
+                opacity: 0;
             }
         }
 
-        /* --- 3. LE CONTENU (Au-dessus du fond) --- */
+        /* --- 3. LE CONTENU --- */
         .page { 
             display: none; 
-            z-index: 10; /* Devant les formules */
+            z-index: 10; 
             position: relative;
             width: 100%;
             max-width: 900px;
@@ -76,210 +75,59 @@
             animation: popIn 0.5s ease;
         }
         
-        #accueil { display: block; } /* L'accueil est visible par défaut */
+        #accueil { display: block; }
 
         @keyframes popIn { 
             from { opacity: 0; transform: scale(0.9); } 
             to { opacity: 1; transform: scale(1); } 
         }
 
-        /* Titre principal */
         .main-title {
-            font-size: 3rem;
+            font-size: 3.5rem; /* Titre plus gros */
             font-weight: 800;
             margin-bottom: 10px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
             display: flex; justify-content: center; align-items: center; gap: 15px;
         }
 
-        /* --- 4. LA GRILLE DES BOUTONS --- */
+        /* --- 4. LA GRILLE DES 4 BOUTONS --- */
         .menu-grid {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 colonnes strictes */
+            gap: 30px; /* Plus d'espace entre les boutons */
             justify-content: center;
-            gap: 25px;
-            margin-top: 40px;
+            margin-top: 50px;
+            max-width: 600px; /* On limite la largeur pour centrer le bloc */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive : Sur téléphone, 1 seule colonne */
+        @media (max-width: 600px) {
+            .menu-grid { grid-template-columns: 1fr; }
         }
 
         .card {
             background: white;
-            width: 260px;
+            width: 100%; /* Prend la place de la grille */
             height: 160px;
-            border-radius: 25px; /* Bords très ronds */
+            border-radius: 25px;
             border: none;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            text-decoration: none;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Effet rebond */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25); /* Ombre plus marquée */
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .card:hover { transform: translateY(-10px) scale(1.02); }
+        .card:hover { transform: translateY(-10px) scale(1.05); }
 
-        .card h2 { margin: 0; font-size: 32px; color: #5a67d8; font-weight: 800; }
-        .card span { font-size: 14px; color: #a0aec0; margin-top: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .card h2 { margin: 0; font-size: 36px; color: #5a67d8; font-weight: 800; }
+        .card span { font-size: 14px; color: #a0aec0; margin-top: 8px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
 
-        /* Couleurs spécifiques */
-        .card.scratch { background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%); }
-        .card.scratch h2, .card.scratch span { color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-
-        .card.auto { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
-        .card.auto h2, .card.auto span { color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-
-        /* Boutons de navigation (Pages internes) */
+        /* Boutons internes */
         .btn {
             display: inline-block;
-            margin: 10px; padding: 12px 24px;
-            border: none; border-radius: 50px;
-            font-size: 16px; font-weight: bold; cursor: pointer;
-            background: white; color: #333;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: 0.3s;
-        }
-        .btn:hover { transform: scale(1.05); }
-        .btn-retour { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.4); }
-
-        /* Styles pour le contenu des cours (Alignement à gauche) */
-        .course-content {
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: left;
-            margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        iframe { border-radius: 10px; width: 100%; height: 500px; border: none; }
-
-    </style>
-</head>
-<body>
-
-    <!-- Ce div va contenir les symboles mathématiques flottants -->
-    <div id="background-formulas"></div>
-
-    <!-- === ÉCRAN 1 : ACCUEIL === -->
-    <div id="accueil" class="page">
-        <div class="main-title">
-            <span>📐</span> Mathématiques
-        </div>
-        <p style="opacity: 0.8; font-size: 1.2rem;">Choisissez votre niveau</p>
-    
-        <div class="menu-grid">
-            <button class="card" onclick="naviguer('menu-6e')">
-                <h2>🔢 6ème</h2><span>Niveau 1</span>
-            </button>
-            <button class="card" onclick="naviguer('menu-5e')">
-                <h2>📊 5ème</h2><span>Niveau 2</span>
-            </button>
-            <button class="card" onclick="naviguer('menu-4e')">
-                <h2>📐 4ème</h2><span>Niveau 3</span>
-            </button>
-            <button class="card" onclick="naviguer('menu-3e')">
-                <h2>∑ 3ème</h2><span>Niveau 4</span>
-            </button>
-            <!-- Bouton Scratch ajouté pour le style -->
-            <button class="card scratch" onclick="alert('Bientôt !')">
-                <h2>🎨 Scratch</h2><span>Code</span>
-            </button>
-            <!-- Bouton Auto ajouté -->
-            <button class="card auto" onclick="alert('Bientôt !')">
-                <h2>⚡ Auto</h2><span>Quiz</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- === ÉCRAN 2 : MENU 6ème === -->
-    <div id="menu-6e" class="page">
-        <h1>Niveau 6ème</h1>
-        <div class="course-content">
-            <h3>Chapitres disponibles :</h3>
-            <button class="btn" onclick="naviguer('chap1-6e')">Chapitre 1 : Nombres et calculs</button>
-            <p>D'autres chapitres arrivent bientôt...</p>
-        </div>
-        <button class="btn btn-retour" onclick="naviguer('accueil')">⬅ Retour Accueil</button>
-    </div>
-
-    <!-- === ÉCRAN 3 : DÉTAIL CHAPITRE 1 (6ème) === -->
-    <div id="chap1-6e" class="page">
-        <h1>6e - Chapitre 1</h1>
-        <div class="course-content">
-            <p>Que veux-tu faire ?</p>
-            <button class="btn" style="background:#4caf50; color:white;" onclick="naviguer('contenu-cours-6e-ch1')">📑 Voir le Cours</button>
-            <button class="btn" style="background:#ff9800; color:white;" onclick="alert('Quiz à venir !')">❓ Faire le Quiz</button>
-            <button class="btn" style="background:#2196f3; color:white;" onclick="alert('Exercices à venir !')">📝 Faire des Exercices</button>
-        </div>
-        <button class="btn btn-retour" onclick="naviguer('menu-6e')">⬅ Retour Menu 6e</button>
-    </div>
-
-    <!-- === ÉCRAN 4 : LE COURS (PDF) === -->
-    <div id="contenu-cours-6e-ch1" class="page">
-        <h1>Cours : Nombres et calculs</h1>
-        <div class="course-content">
-            <iframe src="cours/6e_MATHS_CHAPITRE_1_LECON.pdf">
-                <p>Votre navigateur ne supporte pas les PDF.</p>
-            </iframe>
-        </div>
-        <button class="btn btn-retour" onclick="naviguer('chap1-6e')">⬅ Retour</button>
-    </div>
-
-    <!-- Placeholder pour les autres niveaux (évite les erreurs) -->
-    <div id="menu-5e" class="page"><h1>5ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
-    <div id="menu-4e" class="page"><h1>4ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
-    <div id="menu-3e" class="page"><h1>3ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
-
-    <!-- === SCRIPTS === -->
-    <script>
-        // --- 1. FONCTION DE NAVIGATION ---
-        function naviguer(idPage) {
-            // Cacher toutes les pages
-            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-            // Afficher la page demandée
-            const page = document.getElementById(idPage);
-            if(page) page.style.display = 'block';
-        }
-
-        // --- 2. GÉNÉRATEUR DE PARTICULES (FORMULES MATHS) ---
-        const symbols = ["π", "∑", "∞", "√", "∫", "x²", "sin", "cos", "tan", "%", "≠", "≈", "div", "3.14", "α", "β", "∆", "∅"];
-        const container = document.getElementById('background-formulas');
-
-        function createSymbol() {
-            const el = document.createElement('div');
-            el.classList.add('math-symbol');
-            
-            // Choisir un symbole au hasard
-            el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-            
-            // Position aléatoire (largeur et hauteur)
-            el.style.left = Math.random() * 100 + 'vw'; // Position horizontale
-            el.style.top = Math.random() * 100 + 'vh';  // Position verticale de départ
-            
-            // Taille aléatoire
-            const size = Math.random() * 30 + 10; // Entre 10px et 40px
-            el.style.fontSize = size + 'px';
-            
-            // Durée d'animation aléatoire
-            const duration = Math.random() * 10 + 5; // Entre 5 et 15 secondes
-            el.style.animationDuration = duration + 's';
-            
-            // Ajouter au conteneur
-            container.appendChild(el);
-
-            // Supprimer l'élément après l'animation pour ne pas surcharger le navigateur
-            setTimeout(() => {
-                el.remove();
-            }, duration * 1000);
-        }
-
-        // Créer un nouveau symbole toutes les 300 millisecondes
-        setInterval(createSymbol, 300);
-
-        // En créer 20 tout de suite pour ne pas attendre
-        for(let i=0; i<20; i++) createSymbol();
-
-    </script>
-</body>
-</html>
+            margin: 10px; padding: 15px 30p

@@ -27,12 +27,12 @@
             position: relative;
         }
 
-        /* --- 2. LES FORMULES FLOTTANTES --- */
+        /* --- 2. LES FORMULES FLOTTANTES (STYLE) --- */
         #background-formulas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: -1; /* Tout au fond */
+            z-index: -1;
             overflow: hidden;
         }
 
@@ -40,20 +40,32 @@
             position: absolute;
             color: rgba(255, 255, 255, 0.4); /* Blanc semi-transparent */
             font-family: 'Courier New', monospace;
-            
-            /* C'EST ICI QUE J'AI CHANGÉ POUR RENDRE MOINS ÉPAIS */
-            font-weight: normal; 
-            
+            font-weight: normal; /* Fins */
             user-select: none;
-            animation: floatAndFade linear infinite; 
+            
+            /* L'animation utilise des variables qu'on définit dans le JS (--x, --y) */
+            animation: drift linear infinite; 
             text-shadow: 0 0 5px rgba(255,255,255,0.2);
+            will-change: transform, opacity;
         }
 
-        @keyframes floatAndFade {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.5; } /* Visible */
-            90% { opacity: 0.5; }
-            100% { transform: translateY(-150px) rotate(20deg); opacity: 0; }
+        /* L'ANIMATION DE "VOL" */
+        @keyframes drift {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.5; /* Apparaît doucement */
+            }
+            85% {
+                opacity: 0.5; /* Reste visible */
+            }
+            100% {
+                /* Se déplace vers la destination aléatoire définie en JS */
+                transform: translate(var(--move-x), var(--move-y)) rotate(var(--rotate));
+                opacity: 0; /* Disparaît */
+            }
         }
 
         /* --- 3. LE CONTENU --- */
@@ -104,7 +116,6 @@
         .card h2 { margin: 0; font-size: 36px; color: #5a67d8; font-weight: 800; }
         .card span { font-size: 14px; color: #a0aec0; margin-top: 8px; text-transform: uppercase; font-weight: bold; }
 
-        /* BOUTONS INTERNES */
         .btn {
             display: inline-block; margin: 10px; padding: 15px 30px;
             border: none; border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer;
@@ -120,7 +131,6 @@
 </head>
 <body>
 
-    <!-- Fond animé -->
     <div id="background-formulas"></div>
 
     <!-- === ÉCRAN 1 : ACCUEIL === -->
@@ -162,9 +172,9 @@
         <h1>6e - Chapitre 1</h1>
         <div class="course-content">
             <p>Que veux-tu faire ?</p>
-            <button class="btn" style="background:#4caf50; color:white;" onclick="naviguer('contenu-cours-6e-ch1')">📑 Voir le Cours</button>
-            <button class="btn" style="background:#ff9800; color:white;" onclick="alert('Quiz à venir !')">❓ Faire le Quiz</button>
-            <button class="btn" style="background:#2196f3; color:white;" onclick="alert('Exercices à venir !')">📝 Faire des Exercices</button>
+            <button class="btn" style="background:#4caf50; color:white;" onclick="naviguer('contenu-cours-6e-ch1')">📑 Cours</button>
+            <button class="btn" style="background:#ff9800; color:white;" onclick="alert('Quiz à venir !')">❓ Quiz</button>
+            <button class="btn" style="background:#2196f3; color:white;" onclick="alert('Fiche d'exercices à venir !')">📝 Fiche d'exercices</button>
         </div>
         <button class="btn btn-retour" onclick="naviguer('menu-6e')">⬅ Retour Menu 6e</button>
     </div>
@@ -201,21 +211,36 @@
             el.classList.add('math-symbol');
             el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
             
-            el.style.left = Math.random() * 95 + 'vw'; 
-            el.style.top = Math.random() * 95 + 'vh';
+            // 1. Position de départ aléatoire (n'importe où sur l'écran)
+            el.style.left = Math.random() * 100 + 'vw'; 
+            el.style.top = Math.random() * 100 + 'vh';
             
-            // Taille aléatoire (grosse)
+            // 2. Taille aléatoire (Gros)
             const size = Math.random() * 60 + 50; 
             el.style.fontSize = size + 'px';
             
-            const duration = Math.random() * 10 + 5; 
+            // 3. DIRECTION ALÉATOIRE (C'est ici la magie)
+            // On calcule un mouvement aléatoire entre -200px et +200px sur X et Y
+            const moveX = (Math.random() - 0.5) * 400; 
+            const moveY = (Math.random() - 0.5) * 400; 
+            const rotate = (Math.random() - 0.5) * 60; // Rotation légère
+
+            // On envoie ces valeurs au CSS
+            el.style.setProperty('--move-x', moveX + 'px');
+            el.style.setProperty('--move-y', moveY + 'px');
+            el.style.setProperty('--rotate', rotate + 'deg');
+
+            // 4. Durée
+            const duration = Math.random() * 15 + 10; // Entre 10 et 25 secondes (très lent et fluide)
             el.style.animationDuration = duration + 's';
             
             container.appendChild(el);
             setTimeout(() => { el.remove(); }, duration * 1000);
         }
 
-        setInterval(createSymbol, 400);
+        // On crée des symboles régulièrement
+        setInterval(createSymbol, 500);
+        // On en lance quelques-uns dès le début
         for(let i=0; i<15; i++) createSymbol();
     </script>
 </body>

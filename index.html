@@ -81,39 +81,49 @@
         }
 
         /* --- 4. GRILLE DES BOUTONS --- */
+        /* --- 4. GRILLE DES BOUTONS (LARGE & 3 COLONNES) --- */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr); /* 3 colonnes obligatoires */
             gap: 30px;
             justify-content: center;
-            max-width: 700px;
+            max-width: 1100px; /* Beaucoup plus large pour que ça rentre */
             margin: 0 auto;
             padding: 20px;
         }
 
+        /* Adaptation pour tablettes et téléphones */
+        @media (max-width: 900px) { .menu-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 600px) { .menu-grid { grid-template-columns: 1fr; } }
 
         .card {
-            background: rgba(255, 255, 255, 0.9); /* Très blanc */
-            backdrop-filter: blur(10px); 
-            width: 100%; height: 160px;
-            border-radius: 30px; /* Encore plus rond */
-            border: 1px solid rgba(255,255,255,0.6);
+            background: white; 
+            width: 100%; 
+            height: 180px;
+            border-radius: 25px;
+            border: none;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             cursor: pointer;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
             text-decoration: none;
         }
 
-        .card:hover { transform: translateY(-10px) scale(1.02); background: white; }
+        .card:hover { transform: translateY(-10px) scale(1.03); }
         
-        .card h2 { 
-            margin: 0; font-size: 38px; color: #303585; font-weight: 800; 
-            display: flex; align-items: center; gap: 15px;
-        }
-        .card span { font-size: 13px; color: #888; margin-top: 10px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
+        /* Texte standard (Bleu) */
+        .card h2 { margin: 0; font-size: 32px; color: #5a67d8; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+        .card span { font-size: 14px; color: #a0aec0; margin-top: 8px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
 
+        /* STYLE SCRATCH (Orange) */
+        .card.scratch { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
+        .card.scratch h2, .card.scratch span { color: white !important; text-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        
+        /* STYLE AUTOMATISMES (Vert) */
+        .card.auto { background: linear-gradient(135deg, #42e695 0%, #3bb2b8 100%); }
+        .card.auto h2, .card.auto span { color: white !important; text-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+
+        
         /* BOUTONS INTERNES */
         .btn {
             display: inline-block; margin: 10px; padding: 15px 30px;
@@ -136,11 +146,12 @@
     <!-- === ACCUEIL === -->
     <div id="accueil" class="page" style="display: block;">
         <div class="main-title">
-            Mathématiques
+           📐 Mathématiques
         </div>
-        <div class="subtitle">Collège • Exercices • Leçons</div>
+        <div class="subtitle">Choisissez votre niveau</div>
     
-        <div class="menu-grid">
+       <div class="menu-grid">
+            <!-- Ligne 1 -->
             <button class="card" onclick="naviguer('menu-6e')">
                 <h2>🔢 6ème</h2><span>Niveau 1</span>
             </button>
@@ -150,8 +161,18 @@
             <button class="card" onclick="naviguer('menu-4e')">
                 <h2>📐 4ème</h2><span>Niveau 3</span>
             </button>
+            
+            <!-- Ligne 2 -->
             <button class="card" onclick="naviguer('menu-3e')">
                 <h2>∑ 3ème</h2><span>Niveau 4</span>
+            </button>
+            
+            <!-- Les nouveaux boutons (Scratch et Auto) -->
+            <button class="card scratch" onclick="alert('Bientôt !')">
+                <h2>🎨 Scratch</h2><span>Programmation</span>
+            </button>
+            <button class="card auto" onclick="alert('Bientôt !')">
+                <h2>⚡ Automatismes</h2><span>Entraînement</span>
             </button>
         </div>
     </div>
@@ -161,7 +182,7 @@
         <h1>Niveau 6ème</h1>
         <div class="course-content">
             <h3>Chapitres :</h3>
-            <button class="btn" onclick="naviguer('chap1-6e')">Chapitre 1 : Nombres et calculs</button>
+            <button class="btn" onclick="naviguer('chap1-6e')">Chapitre 1 : Les nombres entiers</button>
         </div>
         <button class="btn btn-retour" onclick="naviguer('accueil')">Retour Accueil</button>
     </div>
@@ -170,9 +191,9 @@
         <h1>6e - Chapitre 1</h1>
         <div class="course-content">
             <p>Que veux-tu faire ?</p>
-            <button class="btn" style="background:#48bb78; color:white;" onclick="naviguer('contenu-cours-6e-ch1')">📑 Le Cours</button>
+            <button class="btn" style="background:#48bb78; color:white;" onclick="naviguer('contenu-cours-6e-ch1')">📑 Cours</button>
             <button class="btn" style="background:#ed8936; color:white;" onclick="alert('Quiz bientôt disponible !')">❓ Quiz</button>
-            <button class="btn" style="background:#4299e1; color:white;" onclick="alert('Exercices bientôt disponibles !')">📝 Exercices</button>
+            <button class="btn" style="background:#4299e1; color:white;" onclick="alert('Fiche d'exercices bientôt disponibles !')">📝 Fiche d'exercices</button>
         </div>
         <button class="btn btn-retour" onclick="naviguer('menu-6e')">Retour</button>
     </div>
@@ -191,14 +212,40 @@
     <div id="menu-3e" class="page"><h1>3ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
 
  <script>
+        // --- 1. LISTES DE SYMBOLES PAR NIVEAU ---
+        const f_accueil = ["π", "∑", "∫", "x", "y", "√", "∞", "≠", "≈", "∆", "µ", "β", "Ω", "θ", "sin", "log", "tan"];
+        
+        const f_6e = ["+", "-", "×", "÷", "=", "10", "100", "0,5", "Cercle", "Angle", "Carré", "1,2", "Perpendiculaire", "//"];
+        const f_5e = ["5/4", "%", "Symétrie", "(-5)", "(+3)", "Triangle", "180°", "Médiatrice", "Aire", "Priorité", "x"];
+        const f_4e = ["x²", "Pythagore", "Cos", "10⁵", "10⁻³", "x+3=0", "Vitesse", "Translation", "Cône", "Pyramide"];
+        const f_3e = ["f(x)", "Thalès", "Probabilité", "sin", "tan", "Sphère", "Homothétie", "Boule", "Ratio", "a²-b²"];
+
+        // Par défaut, on utilise la liste Accueil
+        let symbolesActuels = f_accueil;
+
+        // --- 2. FONCTION DE NAVIGATION INTELLIGENTE ---
         function naviguer(idPage) {
+            // A. Changement de page classique
             document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
             const page = document.getElementById(idPage);
             if(page) page.style.display = 'block';
+
+            // B. Changement des symboles selon la page
+            if (idPage.includes('6e')) {
+                symbolesActuels = f_6e;
+            } else if (idPage.includes('5e')) {
+                symbolesActuels = f_5e;
+            } else if (idPage.includes('4e')) {
+                symbolesActuels = f_4e;
+            } else if (idPage.includes('3e')) {
+                symbolesActuels = f_3e;
+            } else {
+                // Si on revient à l'accueil ou ailleurs
+                symbolesActuels = f_accueil;
+            }
         }
 
-        // --- GÉNÉRATEUR RAPIDE & TOURNANT ---
-        const symbols = ["π", "∑", "∫", "x", "y", "√", "∞", "≠", "≈", "∆", "µ", "β", "Ω", "θ", "sin", "log", "tan"];
+        // --- 3. GÉNÉRATEUR DE SYMBOLES (Le moteur du fond) ---
         const container = document.getElementById('background-formulas');
 
         function createSymbol() {
@@ -206,35 +253,33 @@
 
             const el = document.createElement('div');
             el.classList.add('math-symbol');
-            el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
             
-            // 1. Position aléatoire
+            // ICI : On pioche dans la liste "symbolesActuels" qui change selon la page
+            el.innerText = symbolesActuels[Math.floor(Math.random() * symbolesActuels.length)];
+            
+            // Position
             el.style.left = Math.random() * 100 + 'vw';
             el.style.top = Math.random() * 100 + 'vh';
             
-            // 2. Profondeur & Flou
+            // Profondeur & Flou
             const depth = Math.random(); 
-            const size = (depth * 60) + 20; 
+            const size = (depth * 130) + 20; // Gros symboles
             el.style.fontSize = size + 'px';
-            const blur = (1 - depth) * 4; 
+            const blur = (1 - depth) * 5; 
             el.style.filter = `blur(${blur}px)`;
             const opacity = (depth * 0.4) + 0.1; 
             el.style.setProperty('--target-opacity', opacity);
 
-            // 3. MOUVEMENT & ROTATION (C'est ici que ça change !)
-            // On augmente la distance de déplacement (300px)
+            // Mouvement rapide et tournant
             const moveX = (Math.random() - 0.5) * 300; 
             const moveY = (Math.random() - 0.5) * 300; 
-            
-            // ROTATION FORTE : Ils tournent beaucoup (jusqu'à 360 degrés)
-            const rotate = (Math.random() - 0.5) * 720; // 720 = 2 tours complets
+            const rotate = (Math.random() - 0.5) * 720; 
             
             el.style.setProperty('--move-x', moveX + 'px');
             el.style.setProperty('--move-y', moveY + 'px');
             el.style.setProperty('--rotate', rotate + 'deg');
 
-            // 4. VITESSE ACCÉLÉRÉE
-            // Entre 6 et 12 secondes (C'est beaucoup plus rapide qu'avant)
+            // Vitesse
             const duration = (Math.random() * 6) + 6; 
             el.style.animationDuration = duration + 's';
             
@@ -242,11 +287,8 @@
             setTimeout(() => { el.remove(); }, duration * 1000);
         }
 
-        // On remplit l'écran
+        // Remplissage initial
         for(let i=0; i<40; i++) createSymbol();
-        
-        // On en crée souvent (toutes les 0.4 secondes) pour que ça bouge bien
+        // Création continue
         setInterval(createSymbol, 400);
     </script>
-</body>
-</html>

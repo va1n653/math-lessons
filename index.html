@@ -12,8 +12,8 @@
             width: 100%; min-height: 100vh;
             color: white;
             
-            /* NOUVEAU FOND : Bleu Indigo Profond (Comme la photo 1) */
-            background: radial-gradient(circle at center, #3b42a3 0%, #1e225e 100%);
+            /* Le dégradé EXACT de la vidéo (Radial : plus clair au centre) */
+            background: radial-gradient(circle at center, #5b62c7 0%, #303585 100%);
             
             display: flex; justify-content: center; align-items: center; flex-direction: column;
             overflow: hidden; 
@@ -31,20 +31,24 @@
         .math-symbol {
             position: absolute;
             color: white;
-            font-family: 'Times New Roman', serif; /* Police Maths classique */
+            font-family: 'Times New Roman', serif; 
             font-weight: normal;
             user-select: none;
             will-change: transform, opacity;
+            /* Animation très fluide */
             animation: floating linear infinite;
-            /* Petite ombre pour les détacher du fond */
-            text-shadow: 0 0 10px rgba(255,255,255,0.1);
         }
 
+        /* L'animation douce : Apparition -> Flottement -> Disparition */
         @keyframes floating {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-            10% { opacity: var(--target-opacity); } 
-            90% { opacity: var(--target-opacity); } 
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+            15% { opacity: var(--target-opacity); } /* Apparaît doucement */
+            85% { opacity: var(--target-opacity); } /* Reste visible longtemps */
             100% {
+                /* Se déplace vers la destination calculée en JS */
                 transform: translate(var(--move-x), var(--move-y)) rotate(var(--rotate));
                 opacity: 0;
             }
@@ -60,11 +64,20 @@
         }
 
         .main-title {
-            font-size: 4rem; 
+            font-size: 4.5rem; /* Très gros titre */
             font-weight: 800;
-            margin-bottom: 30px;
-            text-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            margin-bottom: 20px;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.3);
             letter-spacing: -2px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 50px;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         /* --- 4. GRILLE DES BOUTONS --- */
@@ -73,7 +86,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             justify-content: center;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -81,25 +94,25 @@
         @media (max-width: 600px) { .menu-grid { grid-template-columns: 1fr; } }
 
         .card {
-            background: rgba(255, 255, 255, 0.95); 
+            background: rgba(255, 255, 255, 0.9); /* Très blanc */
             backdrop-filter: blur(10px); 
             width: 100%; height: 160px;
-            border-radius: 25px;
-            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 30px; /* Encore plus rond */
+            border: 1px solid rgba(255,255,255,0.6);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             cursor: pointer;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-decoration: none;
         }
 
-        .card:hover { transform: translateY(-10px) scale(1.03); background: white; }
+        .card:hover { transform: translateY(-10px) scale(1.02); background: white; }
         
-        /* Style du texte dans les boutons */
         .card h2 { 
-            margin: 0; font-size: 32px; color: #1e225e; font-weight: 800; 
-            display: flex; align-items: center; gap: 10px;
+            margin: 0; font-size: 38px; color: #303585; font-weight: 800; 
+            display: flex; align-items: center; gap: 15px;
         }
-        .card span { font-size: 14px; color: #5c6b7f; margin-top: 8px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
+        .card span { font-size: 13px; color: #888; margin-top: 10px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
 
         /* BOUTONS INTERNES */
         .btn {
@@ -125,10 +138,9 @@
         <div class="main-title">
             Mathématiques
         </div>
-        <p style="opacity: 0.8; font-size: 1.4rem; font-weight: 300; margin-bottom: 40px;">Collège • Exercices • Leçons</p>
+        <div class="subtitle">Collège • Exercices • Leçons</div>
     
         <div class="menu-grid">
-            <!-- J'ai remis les icônes (🔢, 📊...) pour correspondre à ton design -->
             <button class="card" onclick="naviguer('menu-6e')">
                 <h2>🔢 6ème</h2><span>Niveau 1</span>
             </button>
@@ -158,9 +170,9 @@
         <h1>6e - Chapitre 1</h1>
         <div class="course-content">
             <p>Que veux-tu faire ?</p>
-            <button class="btn" style="background:#48bb78; color:white;" onclick="naviguer('contenu-cours-6e-ch1')">📑 Cours</button>
+            <button class="btn" style="background:#48bb78; color:white;" onclick="naviguer('contenu-cours-6e-ch1')">📑 Le Cours</button>
             <button class="btn" style="background:#ed8936; color:white;" onclick="alert('Quiz bientôt disponible !')">❓ Quiz</button>
-            <button class="btn" style="background:#4299e1; color:white;" onclick="alert('Fiche d'exercices bientôt disponibles !')">📝 Fiche d'exercices</button>
+            <button class="btn" style="background:#4299e1; color:white;" onclick="alert('Exercices bientôt disponibles !')">📝 Exercices</button>
         </div>
         <button class="btn btn-retour" onclick="naviguer('menu-6e')">Retour</button>
     </div>
@@ -186,8 +198,8 @@
             if(page) page.style.display = 'block';
         }
 
-        // --- GÉNÉRATEUR AMÉLIORÉ ---
-        const symbols = ["π", "∑", "∫", "x", "y", "√", "∞", "≠", "≈", "∆", "µ", "β", "Ω", "θ", "sin", "log", "cos", "tan"];
+        // --- GÉNÉRATEUR STYLE "VIDÉO CALME" ---
+        const symbols = ["π", "∑", "∫", "x", "y", "√", "∞", "≠", "≈", "∆", "µ", "β", "Ω", "θ", "sin", "log", "tan"];
         const container = document.getElementById('background-formulas');
 
         function createSymbol() {
@@ -197,48 +209,49 @@
             el.classList.add('math-symbol');
             el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
             
-            // Position
-            const startX = Math.random() * 100;
-            const startY = Math.random() * 100;
-            el.style.left = startX + 'vw';
-            el.style.top = startY + 'vh';
+            // 1. Position aléatoire
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.top = Math.random() * 100 + 'vh';
             
-            // Profondeur
+            // 2. LE SECRET DE LA VIDÉO : Flou et Opacité variables
+            // On définit une "profondeur" (depth)
             const depth = Math.random(); 
             
-            // TAILLE XXL : Jusqu'à 150px pour ceux devant (comme ta photo 1)
-            const size = (depth * 130) + 20; 
+            // Taille : Pas trop gros, entre 20px et 80px (élégant)
+            const size = (depth * 60) + 20; 
             el.style.fontSize = size + 'px';
             
-            // Flou
-            const blur = (1 - depth) * 5; 
+            // Flou : Plus c'est profond, plus c'est flou
+            const blur = (1 - depth) * 4; 
             el.style.filter = `blur(${blur}px)`;
             
-            // Opacité (Plus visible qu'avant)
-            const opacity = (depth * 0.4) + 0.1; 
+            // Opacité : Assez faible pour faire "fantomatique"
+            const opacity = (depth * 0.3) + 0.1; 
             el.style.setProperty('--target-opacity', opacity);
 
-            // Mouvement
-            const moveX = (Math.random() - 0.5) * 300; 
-            const moveY = (Math.random() - 0.5) * 300; 
-            const rotate = (Math.random() - 0.5) * 60; 
+            // 3. Mouvement : LENT et DOUX (Comme la vidéo)
+            // On déplace juste un peu, pas traverser tout l'écran
+            const moveX = (Math.random() - 0.5) * 150; 
+            const moveY = (Math.random() - 0.5) * 150; 
+            const rotate = (Math.random() - 0.5) * 50; 
             
             el.style.setProperty('--move-x', moveX + 'px');
             el.style.setProperty('--move-y', moveY + 'px');
             el.style.setProperty('--rotate', rotate + 'deg');
 
-            // VITESSE ACCÉLÉRÉE : Entre 8s et 18s (au lieu de 30-50s)
-            const duration = (Math.random() * 10) + 8; 
+            // 4. Durée très longue : 20 à 40 secondes
+            const duration = (Math.random() * 20) + 20; 
             el.style.animationDuration = duration + 's';
             
             container.appendChild(el);
             setTimeout(() => { el.remove(); }, duration * 1000);
         }
 
-        // Remplissage initial
-        for(let i=0; i<35; i++) createSymbol();
-        // Création très rapide
-        setInterval(createSymbol, 400);
+        // Remplissage initial (Beaucoup de symboles pour faire l'effet dès le début)
+        for(let i=0; i<50; i++) createSymbol();
+        
+        // On en rajoute doucement
+        setInterval(createSymbol, 600);
     </script>
 </body>
 </html>

@@ -214,6 +214,8 @@
 .txt-red { color: red; font-weight: bold; }
 .txt-blue { color: blue; font-weight: bold; }
 
+.box-green { background: white; border-left: 5px solid #4caf50; padding: 15px; margin: 20px 0; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        
     </style>
 </head>
 <body>
@@ -463,6 +465,39 @@
 
     <!-- === LOGIQUE JAVASCRIPT === -->
     <script>
+        <script>
+    // Ce script s'exécute quand la page charge
+    document.addEventListener("DOMContentLoaded", function() {
+        // On prend tous les paragraphes <p> qui sont dans la feuille de cours
+        let paragraphes = document.querySelectorAll(".lesson-sheet p");
+
+        paragraphes.forEach(p => {
+            let texte = p.innerHTML.trim(); // On lit le texte du paragraphe
+
+            // SI ÇA COMMENCE PAR "DÉFINITION" -> BLEU
+            if (texte.startsWith("Définition")) {
+                p.className = "box box-def"; 
+                p.innerHTML = texte.replace("Définition", "<strong>Définition</strong>");
+            }
+            // SI ÇA COMMENCE PAR "PROPRIÉTÉ" -> JAUNE
+            else if (texte.startsWith("Propriété")) {
+                p.className = "box box-prop";
+                p.innerHTML = texte.replace("Propriété", "<strong>Propriété</strong>");
+            }
+            // SI ÇA COMMENCE PAR "RÈGLE" -> JAUNE (comme demandé)
+            else if (texte.startsWith("Règle")) {
+                p.className = "box box-prop";
+                p.innerHTML = texte.replace("Règle", "<span style='color:red; font-weight:bold;'>Règle</span>");
+            }
+            // SI ÇA COMMENCE PAR "EXEMPLE" -> VERT/BLANC
+            else if (texte.startsWith("Exemple")) {
+                p.className = "box box-green";
+                p.innerHTML = texte.replace("Exemple", "<strong>Exemple</strong>");
+            }
+        });
+    });
+</script>
+    
         // --- 1. LISTES DE SYMBOLES PAR NIVEAU ---
         const f_accueil = ["π", "∑", "∫", "x", "y", "√", "∞", "≠", "≈", "∆", "µ", "β", "Ω", "θ", "sin", "log", "tan"];
         

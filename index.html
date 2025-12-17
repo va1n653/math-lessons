@@ -515,77 +515,89 @@ L'abscisse du point A est 3, on note A(3).</p>
     });
 </script>
     
-        // --- 1. LISTES DE SYMBOLES PAR NIVEAU ---
-        const f_accueil = ["π", "∑", "∫", "x", "y", "√", "∞", "≠", "≈", "∆", "µ", "β", "Ω", "θ", "sin", "log", "tan"];
+       <script>
+    // --- 1. LISTES DE SYMBOLES PAR NIVEAU ---
+    const f_accueil = ["π", "∑", "∫", "x", "y", "√", "∞", "≠", "≈", "∆", "µ", "β", "Ω", "θ", "sin", "log", "tan"];
+    
+    const f_6e = ["+", "-", "×", "÷", "=", "10", "100", "0,5", "Cercle", "Angle", "Carré", "1,2", "Perpendiculaire", "//"];
+    const f_5e = ["5/4", "%", "Symétrie", "(-5)", "(+3)", "Triangle", "180°", "Médiatrice", "Aire", "Priorité", "x"];
+    const f_4e = ["x²", "Pythagore", "Cos", "10⁵", "10⁻³", "x+3=0", "Vitesse", "Translation", "Cône", "Pyramide"];
+    const f_3e = ["f(x)", "Thalès", "Probabilité", "sin", "tan", "Sphère", "Homothétie", "Boule", "Ratio", "a²-b²"];
+
+    let symbolesActuels = f_accueil;
+
+    // --- 2. FONCTION DE NAVIGATION ---
+    function naviguer(idPage) {
+        document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+        const page = document.getElementById(idPage);
+        if(page) page.style.display = 'block';
+
+        // Changement des symboles selon le niveau
+        if (idPage.includes('6e')) { symbolesActuels = f_6e; }
+        else if (idPage.includes('5e')) { symbolesActuels = f_5e; }
+        else if (idPage.includes('4e')) { symbolesActuels = f_4e; }
+        else if (idPage.includes('3e')) { symbolesActuels = f_3e; }
+        else { symbolesActuels = f_accueil; }
         
-        const f_6e = ["+", "-", "×", "÷", "=", "10", "100", "0,5", "Cercle", "Angle", "Carré", "1,2", "Perpendiculaire", "//"];
-        const f_5e = ["5/4", "%", "Symétrie", "(-5)", "(+3)", "Triangle", "180°", "Médiatrice", "Aire", "Priorité", "x"];
-        const f_4e = ["x²", "Pythagore", "Cos", "10⁵", "10⁻³", "x+3=0", "Vitesse", "Translation", "Cône", "Pyramide"];
-        const f_3e = ["f(x)", "Thalès", "Probabilité", "sin", "tan", "Sphère", "Homothétie", "Boule", "Ratio", "a²-b²"];
+        // Remonte en haut de la page
+        window.scrollTo(0, 0);
+    }
 
-        let symbolesActuels = f_accueil;
+    // --- 3. GÉNÉRATEUR DE SYMBOLES (ANIMATION) ---
+    const container = document.getElementById('background-formulas');
 
-        // --- 2. FONCTION DE NAVIGATION ---
-        function naviguer(idPage) {
-            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-            const page = document.getElementById(idPage);
-            if(page) page.style.display = 'block';
+    function createSymbol() {
+        if(!container) return;
+        const el = document.createElement('div');
+        el.classList.add('math-symbol');
+        el.innerText = symbolesActuels[Math.floor(Math.random() * symbolesActuels.length)];
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.top = Math.random() * 100 + 'vh';
+        const depth = Math.random(); 
+        const size = (depth * 50) + 15; 
+        el.style.fontSize = size + 'px';
+        const blur = (1 - depth) * 4; 
+        el.style.filter = `blur(${blur}px)`;
+        const opacity = (depth * 0.4) + 0.1; 
+        el.style.setProperty('--target-opacity', opacity);
+        const moveX = (Math.random() - 0.5) * 300; 
+        const moveY = (Math.random() - 0.5) * 300; 
+        const rotate = (Math.random() - 0.5) * 720; 
+        el.style.setProperty('--move-x', moveX + 'px');
+        el.style.setProperty('--move-y', moveY + 'px');
+        el.style.setProperty('--rotate', rotate + 'deg');
+        const duration = (Math.random() * 6) + 6; 
+        el.style.animationDuration = duration + 's';
+        container.appendChild(el);
+        setTimeout(() => { el.remove(); }, duration * 1000);
+    }
 
-            if (idPage.includes('6e')) { symbolesActuels = f_6e; }
-            else if (idPage.includes('5e')) { symbolesActuels = f_5e; }
-            else if (idPage.includes('4e')) { symbolesActuels = f_4e; }
-            else if (idPage.includes('3e')) { symbolesActuels = f_3e; }
-            else { symbolesActuels = f_accueil; }
-        }
+    for(let i=0; i<40; i++) createSymbol();
+    setInterval(createSymbol, 400);
 
-        // --- 3. GÉNÉRATEUR DE SYMBOLES ---
-        const container = document.getElementById('background-formulas');
-
-        function createSymbol() {
-            if(!container) return;
-
-            const el = document.createElement('div');
-            el.classList.add('math-symbol');
-            el.innerText = symbolesActuels[Math.floor(Math.random() * symbolesActuels.length)];
-            
-            // Position
-            el.style.left = Math.random() * 100 + 'vw';
-            el.style.top = Math.random() * 100 + 'vh';
-            
-            // Profondeur
-            const depth = Math.random(); 
-            
-            // Taille réduite (entre 15px et 65px)
-            const size = (depth * 50) + 15; 
-            el.style.fontSize = size + 'px';
-            
-            // Flou
-            const blur = (1 - depth) * 4; 
-            el.style.filter = `blur(${blur}px)`;
-            
-            // Opacité
-            const opacity = (depth * 0.4) + 0.1; 
-            el.style.setProperty('--target-opacity', opacity);
-
-            // Mouvement (Rapide et tournant)
-            const moveX = (Math.random() - 0.5) * 300; 
-            const moveY = (Math.random() - 0.5) * 300; 
-            const rotate = (Math.random() - 0.5) * 720; 
-            
-            el.style.setProperty('--move-x', moveX + 'px');
-            el.style.setProperty('--move-y', moveY + 'px');
-            el.style.setProperty('--rotate', rotate + 'deg');
-
-            // Vitesse
-            const duration = (Math.random() * 6) + 6; 
-            el.style.animationDuration = duration + 's';
-            
-            container.appendChild(el);
-            setTimeout(() => { el.remove(); }, duration * 1000);
-        }
-
-        for(let i=0; i<40; i++) createSymbol();
-        setInterval(createSymbol, 400);
-    </script>
+    // --- 4. COLORIAGE AUTOMATIQUE DES COURS ---
+    document.addEventListener("DOMContentLoaded", function() {
+        let paragraphes = document.querySelectorAll(".lesson-sheet p");
+        paragraphes.forEach(p => {
+            let texte = p.innerHTML.trim();
+            if (texte.startsWith("Définition")) {
+                p.className = "box box-def"; 
+                p.innerHTML = texte.replace("Définition", "<strong>Définition</strong>");
+            }
+            else if (texte.startsWith("Propriété")) {
+                p.className = "box box-prop";
+                p.innerHTML = texte.replace("Propriété", "<strong>Propriété</strong>");
+            }
+            else if (texte.startsWith("Règle")) {
+                p.className = "box box-prop";
+                p.innerHTML = texte.replace("Règle", "<span style='color:red; font-weight:bold;'>Règle</span>");
+            }
+            else if (texte.startsWith("Exemple")) {
+                p.className = "box box-green";
+                p.innerHTML = texte.replace("Exemple", "<strong>Exemple</strong>");
+            }
+        });
+    });
+</script>
 </body>
 </html>

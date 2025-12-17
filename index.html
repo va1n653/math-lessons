@@ -152,6 +152,42 @@ o<!DOCTYPE html>
 .card-grey .action-btn.active { color: #7f8c8d; }
 .card-grey .action-btn.disabled { background: rgba(0,0,0,0.1); color: rgba(255,255,255,0.6); cursor: not-allowed; }
 .action-btn:hover:not(.disabled) { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        /* --- CORRECTION SCROLL ET FOND BLANC --- */
+        
+        /* 1. On autorise le défilement vers le bas */
+        body { 
+            overflow-y: auto !important; 
+            height: auto !important; 
+            min-height: 100vh;
+        }
+
+        /* 2. Le grand cadre blanc (comme sur ta photo) */
+        .menu-box {
+            background: white;
+            border-radius: 40px;
+            padding: 40px 20px; /* Espace intérieur */
+            margin: 40px auto;  /* Centré avec de l'espace autour */
+            max-width: 900px;   /* Largeur max */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2); /* Ombre portée */
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Le titre en BLEU à l'intérieur du cadre blanc */
+        .menu-box h1 {
+            color: #5a67d8; /* Bleu violet */
+            font-size: 3rem;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        /* Le sous-titre en gris */
+        .menu-box p.intro {
+            color: #718096;
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
     </style>
 </head>
 <body>
@@ -189,129 +225,141 @@ o<!DOCTYPE html>
     </div>
 
     
-<!-- === MENU 6ème (NOUVEAU DESIGN) === -->
+<!-- === MENU 6ème (FINAL AVEC FOND BLANC SCROLLABLE) === -->
     <div id="menu-6e" class="page">
-        <h1 style="margin-bottom: 10px;">🎓 Cours de 6ème</h1>
-        <p style="margin-bottom: 40px; opacity: 0.8;">Choisis ton chapitre et apprends en t'amusant !</p>
+        
+        <!-- On ouvre la BOITE BLANCHE ici -->
+        <div class="menu-box">
+            
+            <!-- En-tête (Titre Bleu) -->
+            <h1>🎓 Cours de 6ème</h1>
+            <p class="intro">Choisis ton chapitre et apprends en t'amusant !</p>
 
-        <div class="chapter-container">
+            <div class="chapter-container">
 
-            <!-- CHAPITRE 1 : Nombres entiers (ROSE - ACTIF) -->
-            <div class="chapter-card card-pink">
-                <div class="chap-header">
-                    <div style="display:flex; align-items:center;">
-                        <span class="chap-icon">🌟</span>
-                        <div class="chap-info">
-                            <h2>Chapitre 1 : Nombres entiers</h2>
-                            <p>Découvre les nombres entiers et leurs propriétés</p>
+                <!-- CHAPITRE 1 : Nombres entiers (ROSE - ACTIF) -->
+                <div class="chapter-card card-pink">
+                    <div class="chap-header">
+                        <div style="display:flex; align-items:center;">
+                            <span class="chap-icon">🌟</span>
+                            <div class="chap-info">
+                                <h2>Les nombres entiers</h2>
+                                <p>Découvre les nombres entiers et leurs propriétés</p>
+                            </div>
                         </div>
+                        <span class="chap-badge">Disponible maintenant✨</span>
                     </div>
-                    <span class="chap-badge">Disponible 🚀</span>
+                    <div class="chap-actions">
+                        <button class="action-btn" onclick="naviguer('contenu-cours-6e-ch1')">📑 Cours</button>
+                        <button class="action-btn" onclick="alert('Bientôt !')">✏️ Fiche d'exercices</button>
+                        <button class="action-btn" onclick="alert('Bientôt !')">⏱️ Quiz</button>
+                    </div>
                 </div>
-                <div class="chap-actions">
-                    <!-- Note : Le bouton Cours renvoie directement au PDF plus bas -->
-                    <button class="action-btn" onclick="naviguer('contenu-cours-6e-ch1')">📑 Cours</button>
-                    <button class="action-btn" onclick="alert('Bientôt !')">✏️ Fiche d'exercices</button>
-                    <button class="action-btn" onclick="alert('Bientôt !')">⏱️ Quiz</button>
-                </div>
-            </div>
 
-            <!-- CHAPITRE 2 : Géométrie (GRIS) -->
-            <div class="chapter-card card-grey">
-                <div class="chap-header">
-                    <div style="display:flex; align-items:center;">
-                        <span class="chap-icon">📐</span>
-                        <div class="chap-info">
-                            <h2>Chapitre 2 : Bases de géométrie</h2>
-                            <p>Points, droites et segments</p>
+                <!-- CHAPITRE 2 : Géométrie (GRIS) -->
+                <div class="chapter-card card-grey">
+                    <div class="chap-header">
+                        <div style="display:flex; align-items:center;">
+                            <span class="chap-icon">🎮</span>
+                            <div class="chap-info">
+                                <h2>Les bases de géométrie</h2>
+                                <p>Découvre les points, les droites et tout ce qui compose la géométrie</p>
+                            </div>
                         </div>
+                        <span class="chap-badge">En travaux 🚧</span>
                     </div>
-                    <span class="chap-badge">En travaux 🚧</span>
+                    <div class="chap-actions">
+                        <button class="action-btn active" onclick="alert('Bientôt !')">📑 Cours</button>
+                        <button class="action-btn disabled">✏️ Fiche d'exercices</button>
+                        <button class="action-btn disabled">⏱️ Quiz</button>
+                    </div>
                 </div>
-                <div class="chap-actions">
-                    <button class="action-btn active" onclick="alert('Bientôt !')">📑 Cours</button>
-                    <button class="action-btn disabled">✏️ Fiche d'exercices</button>
-                    <button class="action-btn disabled">⏱️ Quiz</button>
-                </div>
-            </div>
 
-            <!-- CHAPITRE 3 : Décimaux (GRIS) -->
-            <div class="chapter-card card-grey">
-                <div class="chap-header">
-                    <div style="display:flex; align-items:center;">
-                        <span class="chap-icon">🔢</span>
-                        <div class="chap-info">
-                            <h2>Chapitre 3 : Nombres décimaux</h2>
-                            <p>Maîtrise les virgules</p>
+                <!-- CHAPITRE 3 : Décimaux (GRIS) -->
+                <div class="chapter-card card-grey">
+                    <div class="chap-header">
+                        <div style="display:flex; align-items:center;">
+                            <span class="chap-icon">🔢</span>
+                            <div class="chap-info">
+                                <h2>Les nombres décimaux</h2>
+                                <p>Maîtrise les virgules et les nombres décimaux</p>
+                            </div>
                         </div>
+                        <span class="chap-badge">En travaux 🚧</span>
                     </div>
-                    <span class="chap-badge">En travaux 🚧</span>
+                    <div class="chap-actions">
+                        <button class="action-btn active" onclick="alert('Bientôt !')">📑 Cours</button>
+                        <button class="action-btn disabled">✏️ Fiche d'exercices</button>
+                        <button class="action-btn disabled">⏱️ Quiz</button>
+                    </div>
                 </div>
-                <div class="chap-actions">
-                    <button class="action-btn active" onclick="alert('Bientôt !')">📑 Cours</button>
-                    <button class="action-btn disabled">✏️ Fiche d'exercices</button>
-                    <button class="action-btn disabled">⏱️ Quiz</button>
-                </div>
-            </div>
 
-            <!-- CHAPITRE 4 : Opérations (GRIS) -->
-            <div class="chapter-card card-grey">
-                <div class="chap-header">
-                    <div style="display:flex; align-items:center;">
-                        <span class="chap-icon">✖️</span>
-                        <div class="chap-info">
-                            <h2>Chapitre 4 : Opérations</h2>
-                            <p>Addition, soustraction et multiplication</p>
+                <!-- CHAPITRE 4 : Opérations (GRIS) -->
+                <div class="chapter-card card-grey">
+                    <div class="chap-header">
+                        <div style="display:flex; align-items:center;">
+                            <span class="chap-icon">📚</span>
+                            <div class="chap-info">
+                                <h2>Gestion de données</h2>
+                                <p>Bientôt, tu sauras créer et lire des tableaux et des graphiques</p>
+                            </div>
                         </div>
+                        <span class="chap-badge">En travaux 🚧</span>
                     </div>
-                    <span class="chap-badge">En travaux 🚧</span>
+                    <div class="chap-actions">
+                        <button class="action-btn active" onclick="alert('Bientôt !')">📑 Cours</button>
+                        <button class="action-btn disabled">✏️ Fiche d'exercices</button>
+                        <button class="action-btn disabled">⏱️ Quiz</button>
+                    </div>
                 </div>
-                <div class="chap-actions">
-                    <button class="action-btn active" onclick="alert('Bientôt !')">📑 Cours</button>
-                    <button class="action-btn disabled">✏️ Fiche d'exercices</button>
-                    <button class="action-btn disabled">⏱️ Quiz</button>
-                </div>
-            </div>
 
-            <!-- CHAPITRE 5 : Données (GRIS) -->
-            <div class="chapter-card card-grey">
-                <div class="chap-header">
-                    <div style="display:flex; align-items:center;">
-                        <span class="chap-icon">📊</span>
-                        <div class="chap-info">
-                            <h2>Chapitre 5 : Gestion de données</h2>
-                            <p>Lire des tableaux et graphiques</p>
+                <!-- CHAPITRE 5 : Données (GRIS) -->
+                <div class="chapter-card card-grey">
+                    <div class="chap-header">
+                        <div style="display:flex; align-items:center;">
+                            <span class="chap-icon">📐</span>
+                            <div class="chap-info">
+                                <h2>Droites parallèles et perpendiculaires</h2>
+                                <p>Apprends à construire des droites parallèles et perpendiculaires</p>
+                            </div>
                         </div>
+                        <span class="chap-badge">En travaux 🚧</span>
                     </div>
-                    <span class="chap-badge">En travaux 🚧</span>
+                    <div class="chap-actions">
+                        <button class="action-btn active" onclick="alert('Bientôt !')">📑 Cours</button>
+                        <button class="action-btn disabled">✏️ Fiche d'exercices</button>
+                        <button class="action-btn disabled">⏱️ Quiz</button>
+                    </div>
                 </div>
-                <div class="chap-actions">
-                    <button class="action-btn active" onclick="alert('Bientôt !')">📑 Cours</button>
-                    <button class="action-btn disabled">✏️ Fiche d'exercices</button>
-                    <button class="action-btn disabled">⏱️ Quiz</button>
-                </div>
-            </div>
 
-            <!-- CHAPITRE 6 : À définir (GRIS) -->
-            <div class="chapter-card card-grey">
-                <div class="chap-header">
-                    <div style="display:flex; align-items:center;">
-                        <span class="chap-icon">🎓</span>
-                        <div class="chap-info">
-                            <h2>Chapitre 6 : Sujet à venir</h2>
-                            <p>Contenu en cours de création</p>
+                <!-- CHAPITRE 6 : À définir (GRIS) -->
+                <div class="chapter-card card-grey">
+                    <div class="chap-header">
+                        <div style="display:flex; align-items:center;">
+                            <span class="chap-icon">📐</span>
+                            <div class="chap-info">
+                                <h2>Fractions partie 1</h2>
+                                <p>Apprends les bases des fractions</p>
+                            </div>
                         </div>
+                        <span class="chap-badge">En travaux 🚧</span>
                     </div>
-                    <span class="chap-badge">En travaux 🚧</span>
+                    <div class="chap-actions">
+                        <button class="action-btn active" onclick="alert('Bientôt !')">📑 Cours</button>
+                        <button class="action-btn disabled">✏️ Fiche d'exercices</button>
+                        <button class="action-btn disabled">⏱️ Quiz</button>
+                    </div>
                 </div>
-                <div class="chap-actions">
-                    <button class="action-btn active" onclick="alert('Bientôt !')">📑 Cours</button>
-                    <button class="action-btn disabled">✏️ Fiche d'exercices</button>
-                    <button class="action-btn disabled">⏱️ Quiz</button>
-                </div>
-            </div>
 
-        </div> <!-- Fin container -->
+            </div> <!-- Fin container chapitres -->
+
+        </div> <!-- Fin de la MENU-BOX (Boite blanche) -->
+
+        <br>
+        <!-- Bouton retour hors de la boite blanche -->
+        <button class="btn btn-retour" onclick="naviguer('accueil')">⬅ Retour à l'accueil</button>
+        <br><br>
+    </div>
 
         <br>
         <button class="btn btn-retour" onclick="naviguer('accueil')">⬅ Retour Accueil</button>

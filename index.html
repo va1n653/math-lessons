@@ -409,21 +409,55 @@
 0 ; 1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8 ; 9
 C’est le système décimal de position.</p>
 
-<p> Propriété :Chaque chiffre, à l’exception de celui des unités représente un “paquet de 10”.
+<p> Propriété : Chaque chiffre, à l’exception de celui des unités représente un “paquet de 10”.
 *dix unités représentent une dizaine
-
+<img src="cubes.png" style="height: 50px; vertical-align: middle;">
 *dix dizaine représentent une centaine
-
-
+<img src="dizaines.png" style="height: 50px; vertical-align: middle;">
 *dix centaine représentent une unité de mille
 *ect...</p>
-Exemple :
 
-
+<p>Exemple :
+<img src="tableau.png" style="height: 50px; vertical-align: middle;">
 Dans 4 705 232, le chiffre 2 des unités représente 2 x 1 alors que le 2 des centaines représente 2 x 100. Ce nombre se lit quatre-millions-sept-cent-cinq-mille-deux-cent-trente-deux.
 Il peut se décomposer de la façon suivante :
-4 705 232 = (4 x 1 000 000) + (7 x 100 000) + (5 x 1 000) + (2 x 100) + (3 x 10) + (2 x 1)
+4 705 232 = (4 x 1 000 000) + (7 x 100 000) + (5 x 1 000) + (2 x 100) + (3 x 10) + (2 x 1)</p>
 
+        <h2 class="lesson-h2">II. Comparer des nombres entiers
+            
+<p>Définition : Un nombre entier est souvent composé de plusieurs chiffres, par exemple 1 838 est composé de quatre chiffres.</p>
+            
+<p>*Règle 1 : Le nombre entier qui a le plus de chiffres est le plus grand.</p>
+            
+<p>Exemple : Comparer 537 et 89.
+537 a trois chiffres et 89 a deux chiffres. Ainsi, 537 > 89.</p>
+            
+<p>*Règle 2 : Si les nombres entiers ont le même nombre de chiffres, on compare chaque chiffre un par un à partir de la gauche.
+Dès qu’un chiffre est plus grand qu’un autre, on peut dire que ce nombre est le plus grand.</p>
+            
+<p>Exemple : Comparer 3 546 et 3 527
+Ces deux nombres ont quatre chiffres,
+3 = 3 ; 5 = 5 ; 4 > 2.
+Ainsi, 3 546 > 3 527.</p>
+            
+<p>*Règle 3 : Si tous les chiffres sont identiques, alors les nombres sont égaux.</p>
+            
+<p>Exemple : Comparer 234 et 234.
+2 = 2 ; 3 = 3 ; 4 = 4.
+Ainsi, 234 = 234.</p>
+            
+        <h2 class="lesson-h2">III. Repérage sur une demi-droite graduée
+
+<p>Définition : Une demi-droite graduée est une demi-droite sur laquelle on a choisi une unité de longueur reportée régulièrement depuis l'origine:</p>
+<img src="origine.png" style="height: 50px; vertical-align: middle;">
+<p>Exemple :
+Je choisis comme unité de longueur 2 carreaux (2 carreaux représentent donc un écart de 1)
+<img src="unitedelongueur.png" style="height: 50px; vertical-align: middle;"></p>
+<p>Propriété : Sur une demi-droite graduée, chaque point est repéré par un unique nombre appelé abscisse de ce point.</p>
+<p>Exemple :
+<img src="a.png" style="height: 50px; vertical-align: middle;">
+Ici, nous avons une demi-droite graduée d'origine O et d'unité 4 carreaux.
+L'abscisse du point A est 3, on note A(3).</p>
     </div>
 
     <br>
@@ -445,16 +479,6 @@ Il peut se décomposer de la façon suivante :
         </div>
         <button class="btn btn-retour" onclick="naviguer('menu-6e')">Retour au menu 6e</button>
     </div>
-
-    <!-- Placeholders (pour que les boutons 5e, 4e, 3e ne fassent pas d'erreur) -->
-    <div id="menu-5e" class="page"><h1>5ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
-    <div id="menu-4e" class="page"><h1>4ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
-    <div id="menu-3e" class="page"><h1>3ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
-
-    <!-- Placeholders (pour que les boutons 5e, 4e, 3e ne fassent pas d'erreur) -->
-    <div id="menu-5e" class="page"><h1>5ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
-    <div id="menu-4e" class="page"><h1>4ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
-    <div id="menu-3e" class="page"><h1>3ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>
 
     <!-- === LOGIQUE JAVASCRIPT === -->
     <script>

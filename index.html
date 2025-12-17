@@ -188,6 +188,32 @@
             font-size: 1.1rem;
             margin-bottom: 40px;
         }
+
+        /* --- STYLE JOLI POUR LES COURS --- */
+.lesson-sheet {
+    background: white;
+    color: #333;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: left;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.lesson-title { color: red; text-align: center; font-size: 2.5rem; margin-bottom: 30px; }
+.lesson-h2 { color: red; border-bottom: 2px solid red; display: inline-block; margin-top: 30px; font-size: 1.5rem; }
+
+/* Les boîtes colorées */
+.box { padding: 15px 20px; margin: 20px 0; border-left: 5px solid; border-radius: 5px; }
+
+.box-def { background: #e3f2fd; border-color: #2196f3; color: #0d47a1; } /* Bleu */
+.box-prop { background: #fffde7; border-color: #fbc02d; color: #333; }   /* Jaune */
+
+/* Mise en forme du texte */
+.txt-red { color: red; font-weight: bold; }
+.txt-blue { color: blue; font-weight: bold; }
+
     </style>
 </head>
 <body>
@@ -363,14 +389,51 @@
     </div>
 
 
-    <!-- === PAGE PDF CHAPITRE 1 (Ne pas supprimer, c'est là que mène le bouton Cours) === -->
-    <div id="contenu-cours-6e-ch1" class="page">
-        <h1>Cours : Nombres</h1>
-        <div class="course-content">
-            <iframe src="cours/6e_MATHS_CHAPITRE_1_LECON.pdf"></iframe>
-        </div>
-        <button class="btn btn-retour" onclick="naviguer('menu-6e')">Retour au menu 6e</button>
+    <!-- === PAGE DE COURS (DESIGN PROPRE) === -->
+<div id="contenu-cours-6e-ch1" class="page">
+    
+    <!-- Lien retour discret en haut -->
+    <div style="text-align: left; margin-bottom: 20px;">
+        <a href="#" onclick="naviguer('menu-6e')" style="color: white; text-decoration: none;">← Retour au choix des chapitres</a>
     </div>
+
+    <!-- FEUILLE DE COURS -->
+    <div class="lesson-sheet">
+        <h1 class="lesson-title">Les nombres entiers</h1>
+
+        <h2 class="lesson-h2">I. Numération décimale</h2>
+
+        <!-- Boîte BLEUE (Définition) -->
+        <div class="box box-def">
+            <strong>Définition :</strong> Pour écrire tous les nombres, on utilise seulement 10 symboles que nous appelons <span class="txt-red">chiffres</span> :
+            <br><br>
+            <span class="txt-blue" style="font-size: 1.2rem;">0 ; 1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8 ; 9.</span>
+            <br><br>
+            C'est le <span class="txt-red">système décimal</span>.
+        </div>
+
+        <!-- Boîte JAUNE (Propriété) -->
+        <div class="box box-prop">
+            <strong>Propriété :</strong> La position des chiffres dans un nombre détermine sa signification.
+            <br><br>
+            <span class="txt-blue">Chaque chiffre, à l'exception de celui des unités, représente un « paquet de 10 » :</span>
+            <ul>
+                <li>dix unités représentent une dizaine</li>
+                <!-- Image de cubes (remplace src par ton image si tu en as une) -->
+                <img src="https://img.icons8.com/color/48/000000/sugar-cubes.png" style="vertical-align: middle;"> = 1 dizaine
+                
+                <li style="margin-top:10px;">dix dizaines représentent une centaine</li>
+                <img src="https://img.icons8.com/color/48/000000/chocolate-bar.png" style="vertical-align: middle;"> = 1 centaine
+            </ul>
+        </div>
+
+        <p><i>Exemple : Dans le nombre <strong>352</strong>, le chiffre 5 est le chiffre des dizaines.</i></p>
+
+    </div>
+
+    <br>
+    <button class="btn btn-retour" onclick="naviguer('menu-6e')">Retour au menu 6e</button>
+</div>
 
     <!-- Placeholders (pour que les boutons 5e, 4e, 3e ne fassent pas d'erreur) -->
     <div id="menu-5e" class="page"><h1>5ème</h1><p>En construction...</p><button class="btn btn-retour" onclick="naviguer('accueil')">Retour</button></div>

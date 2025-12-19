@@ -6,20 +6,16 @@
     <title>Maths - Collège</title>
     <style>
         /* --- 1. LE FOND ET LA STRUCTURE --- */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0; padding: 0;
-            width: 100%; min-height: 100vh;
-            color: white;
-            
-            /* LE FOND LUMINEUX (Bleu -> Violet) */
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            
-            display: flex; justify-content: center; align-items: center; flex-direction: column;
-            overflow: hidden; 
-            position: relative;
-        }
-
+       body {
+    /* Un bleu très très sombre, presque noir */
+    background: radial-gradient(circle at center, #2d3748 0%, #1a202c 100%);
+    
+    /* ... (garde le reste de ton code body : font-family, margin, etc.) ... */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 0; width: 100%; min-height: 100vh; color: white;
+    display: flex; justify-content: center; align-items: center; flex-direction: column;
+    overflow-y: auto !important; position: relative;
+           
         /* --- 2. LES PARTICULES (MATHS) --- */
         #background-formulas {
             position: fixed;
@@ -215,7 +211,23 @@
 .txt-blue { color: blue; font-weight: bold; }
 
 .box-green { background: white; border-left: 5px solid #4caf50; padding: 15px; margin: 20px 0; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        
+        /* --- STYLE BENTO GRID --- */
+.bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 180px 180px 100px; gap: 20px; max-width: 1000px; margin: 0 auto; padding: 20px; }
+.bento-card { border-radius: 25px; padding: 20px; color: white; cursor: pointer; position: relative; overflow: hidden; transition: transform 0.3s; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+.bento-card:hover { transform: translateY(-5px) scale(1.02); }
+.bento-icon { font-size: 3rem; margin-bottom: 10px; }
+.bento-card h2 { margin: 0; font-size: 1.5rem; font-weight: 800; }
+.bento-card p { margin: 5px 0 0; opacity: 0.9; font-size: 0.9rem; }
+
+/* Couleurs et Positions */
+.level-6 { grid-column: span 2; background: linear-gradient(135deg, #48bb78, #38a169); }
+.level-5 { grid-column: span 1; background: linear-gradient(135deg, #4299e1, #3182ce); }
+.level-4 { grid-column: span 1; background: linear-gradient(135deg, #ecc94b, #d69e2e); color: #333; } /* Jaune texte noir */
+.level-3 { grid-column: span 4; background: linear-gradient(135deg, #9f7aea, #805ad5); }
+.scratch-item { grid-column: span 2; background: linear-gradient(135deg, #ed8936, #dd6b20); flex-direction: row; gap: 15px; }
+.auto-item { grid-column: span 2; background: linear-gradient(135deg, #0bc5ea, #0987a0); flex-direction: row; gap: 15px; }
+
+@media (max-width: 800px) { .bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; } .bento-card, .level-6, .level-3, .scratch-item, .auto-item { grid-column: span 1; height: 120px; } }
     </style>
 </head>
 <body>
@@ -227,30 +239,53 @@
         <div class="main-title">📐 Mathématiques</div>
         <div class="subtitle">Choisissez votre niveau</div>
     
-        <div class="menu-grid">
-            <!-- Ligne 1 -->
-            <button class="card" onclick="naviguer('menu-6e')">
-                <h2>🔢 6ème</h2><span>Niveau 1</span>
-            </button>
-            <button class="card" onclick="naviguer('menu-5e')">
-                <h2>📊 5ème</h2><span>Niveau 2</span>
-            </button>
-            <button class="card" onclick="naviguer('menu-4e')">
-                <h2>📐 4ème</h2><span>Niveau 3</span>
-            </button>
-            
-            <!-- Ligne 2 -->
-            <button class="card" onclick="naviguer('menu-3e')">
-                <h2>∑ 3ème</h2><span>Niveau 4</span>
-            </button>
-            <button class="card scratch" onclick="alert('Bientôt !')">
-                <h2>🎨 Scratch</h2><span>Programmation</span>
-            </button>
-            <button class="card auto" onclick="alert('Bientôt !')">
-                <h2>⚡ Automatismes</h2><span>Entraînement</span>
-            </button>
+     <div class="bento-grid">
+    
+    <!-- 6ème : Grande case (Début) -->
+    <div class="bento-card level-6" onclick="naviguer('menu-6e')">
+        <span class="bento-icon">🌱</span>
+        <div class="bento-content">
+            <h2>6ème</h2>
+            <p>Le cycle d'adaptation</p>
         </div>
+        <div class="bento-bg"></div>
     </div>
+
+    <!-- 5ème : Case verticale -->
+    <div class="bento-card level-5" onclick="naviguer('menu-5e')">
+        <span class="bento-icon">📘</span>
+        <h2>5ème</h2>
+    </div>
+
+    <!-- 4ème : Case verticale -->
+    <div class="bento-card level-4" onclick="naviguer('menu-4e')">
+        <span class="bento-icon">📐</span>
+        <h2>4ème</h2>
+    </div>
+
+    <!-- 3ème : Grande case (Brevet) -->
+    <div class="bento-card level-3" onclick="naviguer('menu-3e')">
+        <span class="bento-icon">🎓</span>
+        <div class="bento-content">
+            <h2>3ème</h2>
+            <p>Objectif Brevet !</p>
+        </div>
+        <div class="bento-bg"></div>
+    </div>
+
+    <!-- Scratch : Large -->
+    <div class="bento-card bento-wide scratch-item" onclick="naviguer('menu-scratch')">
+        <span class="bento-icon">🐱</span>
+        <h2>Atelier Scratch</h2>
+    </div>
+
+    <!-- Auto : Large -->
+    <div class="bento-card bento-wide auto-item" onclick="alert('Bientôt !')">
+        <span class="bento-icon">⚡</span>
+        <h2>Automatismes</h2>
+    </div>
+
+</div>
 
     
 <!-- === MENU 6ème (FINAL AVEC FOND BLANC SCROLLABLE) === -->
